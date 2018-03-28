@@ -64,12 +64,11 @@ namespace ImageService
         protected override void OnStart(string[] args)
         {
             // Update the service state to Start Pending.  
-            eventLog1.WriteEntry("Start ending");
+            eventLog1.WriteEntry("Start Pending");
             ServiceStatus serviceStatus = new ServiceStatus();
             serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
             serviceStatus.dwWaitHint = 100000;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
-            eventLog1.WriteEntry("In OnStart");
             // Set up a timer to trigger every minute.  
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = 60000; // 60 seconds  
@@ -78,6 +77,8 @@ namespace ImageService
             // Update the service state to Running.  
             serviceStatus.dwCurrentState = ServiceState.SERVICE_RUNNING;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
+            eventLog1.WriteEntry("In OnStart");
+
         }
 
         protected override void OnStop()
