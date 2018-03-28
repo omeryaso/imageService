@@ -64,6 +64,7 @@ namespace ImageService
         protected override void OnStart(string[] args)
         {
             // Update the service state to Start Pending.  
+            eventLog1.WriteEntry("Start ending");
             ServiceStatus serviceStatus = new ServiceStatus();
             serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
             serviceStatus.dwWaitHint = 100000;
