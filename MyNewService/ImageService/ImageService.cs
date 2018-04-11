@@ -8,6 +8,12 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using ImageService.Server;
+using ImageService.Modal;
+using ImageService.Controller;
+using ImageService.Logging;
+using ImageService.Logging.Modal;
+
 public enum ServiceState
 {
     SERVICE_STOPPED = 0x00000001,
@@ -36,6 +42,10 @@ namespace ImageService
 
     public partial class ImageService : ServiceBase
     {
+        private ImageServer m_imageServer;          // The Image Server
+        private IImageServiceModal modal;
+        private IImageController contr;
+        private ILoggingService logging;
         private System.ComponentModel.IContainer components;
         private System.Diagnostics.EventLog eventLog1;
         private int eventId = 1;
@@ -63,7 +73,9 @@ namespace ImageService
 
         protected override void OnStart(string[] args)
         {
+            this.logging.MessageRecieved += this.Logwrite;
             // Update the service state to Start Pending.  
+
             eventLog1.WriteEntry("Start Pending");
             ServiceStatus serviceStatus = new ServiceStatus();
             serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
@@ -83,6 +95,7 @@ namespace ImageService
 
         protected override void OnStop()
         {
+            this.logging.MessageRecieved -= this.Logwrite;
             eventLog1.WriteEntry("In onStop.");
         }
         /*
@@ -95,6 +108,11 @@ namespace ImageService
         {
             // TODO: Insert monitoring activities here.  
             eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
+        }
+
+        private void Logwrite(object sender, MessageRecievedEventArgs e)
+        {
+            this.eventLog1.WriteEntry(e.Message);
         }
     }
 }
