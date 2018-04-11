@@ -20,12 +20,29 @@ namespace ImageService.Controller
             m_modal = modal;                    // Storing the Modal Of The System
             commands = new Dictionary<int, ICommand>()
             {
-				// For Now will contain NEW_FILE_COMMAND
+                // For Now will contain NEW_FILE_COMMAND
+                { (int)CommandEnum.NewFileCommand,new NewFileCommand(m_modal) }
             };
         }
         public string ExecuteCommand(int commandID, string[] args, out bool resultSuccesful)
         {
-           // Write Code Here
+            if (commands.TryGetValue(commandID, out ICommand command))
+            {
+                Task<Tuple<string, bool>> task = new Task<Tuple<string, bool>>(() =>
+                {
+                    string message = command.Execute(args, out bool result);
+                    return Tuple.Create(message, result);
+                });
+                task.Start();
+                resultSuccesful = task.Result.Item2;
+                return task.Result.Item1;
+            }
+            else
+            {
+                resultSuccesful = false;
+                return "The command hasn't been found";
+            }
         }
     }
 }
+
