@@ -24,6 +24,10 @@ namespace ImageService.Modal
             m_thumbnailSize = size;
         }
 
+        public ImageServiceModal()
+        {
+        }
+
         public string AddFile(string path, out bool result)
         {
             if (File.Exists(path))

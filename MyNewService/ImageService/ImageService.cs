@@ -13,6 +13,7 @@ using ImageService.Modal;
 using ImageService.Controller;
 using ImageService.Logging;
 using ImageService.Logging.Modal;
+using System.Configuration;
 
 public enum ServiceState
 {
@@ -52,16 +53,8 @@ namespace ImageService
         public ImageService(string[] args)
         {
             InitializeComponent();
-            string eventSourceName = "MySource";
-            string logName = "MyNewLog";
-            if (args.Count() > 0)
-            {
-                eventSourceName = args[0];
-            }
-            if (args.Count() > 1)
-            {
-                logName = args[1];
-            }
+            string eventSourceName = ConfigurationManager.AppSettings.Get("SourceName");
+            string logName = ConfigurationManager.AppSettings.Get("LogName");
             eventLog1 = new System.Diagnostics.EventLog();
             if (!System.Diagnostics.EventLog.SourceExists(eventSourceName))
             {
@@ -69,11 +62,16 @@ namespace ImageService
             }
             eventLog1.Source = eventSourceName;
             eventLog1.Log = logName;
+            this.logging = new LoggingService();
+            this.logging.MessageRecieved += this.Logwrite;
+            this.modal = new ImageServiceModal(ConfigurationManager.AppSettings["OutputDir"], Int32.Parse(ConfigurationManager.AppSettings.Get("ThumbnailSize")));
+            this.contr = new ImageController(this.modal);
+            this.m_imageServer = new ImageServer(this.contr, this.logging);
+
         }
 
         protected override void OnStart(string[] args)
         {
-            this.logging.MessageRecieved += this.Logwrite;
             // Update the service state to Start Pending.  
 
             eventLog1.WriteEntry("Start Pending");
