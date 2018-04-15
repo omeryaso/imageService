@@ -13,8 +13,8 @@ namespace ImageService.Commands
     public interface ICommand
     {
         /// <summary>
-        /// The fuction recives args and execuiting using it. the outcume will be written to
-        /// the result bollean that she get (must be initialize). true for success false for failiure. 
+        /// The fuction recives args and execute them. the outcume will be written to
+        /// the result boollean that it get (must be initialize). true for success false for failiure. 
         /// </summary>
         /// <param name="args"></param>
         /// <param name="result"></param>

@@ -38,7 +38,12 @@ namespace ImageService.Modal
         {
         }
 
-
+        /// <summary>
+        /// the function creates the directories and then moves the images
+        /// to the dest folder. returns the log message that will be updated
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="result"></param>
         public string AddFile(string path, out bool result)
         {
             if (File.Exists(path))
@@ -48,7 +53,7 @@ namespace ImageService.Modal
                 outPath = outPath + path.Substring(path.LastIndexOf("\\"));
                 thumbOutPath = thumbOutPath + path.Substring(path.LastIndexOf("\\"));
                 thumbOutPath = Path.ChangeExtension(thumbOutPath, "thumb");
-                //TODO: change the implementation
+                //TODO: simplify the implementation
                 outPath = ChecksifExists(outPath);
                 thumbOutPath = ChecksifExists(thumbOutPath);
                 //move the imgaes
@@ -60,6 +65,13 @@ namespace ImageService.Modal
             result = false;
             return "The image is doesn't exist in " + path;
         }
+
+        /// <summary>
+        /// the function moves the photo in the path to the output path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="outPath"></param>
+        /// <param name="thumbOutPath"></param>
 
         private void Move(string path, string outPath, string thumbOutPath)
         {
@@ -75,7 +87,12 @@ namespace ImageService.Modal
             Directory.Move(path, outPath);
         }
 
-        //TODO: change the implementation
+        //TODO: simplify the implementation
+
+        /// <summary>
+        /// the function checks wether the file is exist or not
+        /// </summary>
+        /// <param name="path"></param>
 
         private string ChecksifExists(string path)
         {
@@ -92,6 +109,12 @@ namespace ImageService.Modal
             return path;        
         }
 
+        /// <summary>
+        /// the function creates the directories that needed for the photos
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="outPath"></param>
+        /// <param name="thumbOutPath"></param>
         private void DirectoryCreator(string path, out string outPath, out string thumbOutPath)
         {
             DateTime created = new DateTime();
@@ -106,7 +129,7 @@ namespace ImageService.Modal
             }
             int iMonth = created.Month;
             int year = created.Year;
-            string month = ImonthToString(iMonth);
+            string month = MonthToString(iMonth);
             string yearMonth = year.ToString() + "\\" + month;
             outPath = m_OutputFolder + "\\" + yearMonth;
             thumbOutPath = m_OutputFolder + "\\Thumbnails" + "\\" + yearMonth;
@@ -121,9 +144,15 @@ namespace ImageService.Modal
            
         }
 
-        private string ImonthToString(int iMonth)
+        /// <summary>
+        /// the function change the number of the month to the string that represent
+        /// the month
+        /// </summary>
+        /// <param name="path"></param>
+
+        private string MonthToString(int month)
         {
-            switch (iMonth)
+            switch (month)
             {
                 case (1):
                     return "January";

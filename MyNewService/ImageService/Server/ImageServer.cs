@@ -27,7 +27,7 @@ namespace ImageService.Server
         #endregion
 
         /// <summary>
-        /// constructor
+        /// constructor - createas an handler for each directory
         /// </summary>
         /// <param name="m_controller"></param>
         /// <param name="m_logging"></param>
@@ -56,7 +56,7 @@ namespace ImageService.Server
         }
 
         /// <summary>
-        /// close a handler and updates the log
+        /// closes a handler and updates the log
         /// </summary>
         /// <param name="src"></param>
         /// <param name="e"></param>
@@ -67,7 +67,7 @@ namespace ImageService.Server
         }
 
         /// <summary>
-        /// close the server and updates the log
+        /// closes the server and updates the log
         /// </summary>
         public void ServerClose()
         {

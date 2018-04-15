@@ -50,6 +50,13 @@ namespace ImageService
         private System.ComponentModel.IContainer components;
         private System.Diagnostics.EventLog eventLog1;
         private int eventId = 1;
+
+        /// <summary>
+        /// constructor creates an instance of all the components and intitilize
+        /// the logger
+        /// </summary>
+        /// <param name="args"></param>
+
         public ImageService(string[] args)
         {
             InitializeComponent();
@@ -69,6 +76,11 @@ namespace ImageService
             this.m_imageServer = new ImageServer(this.contr, this.logging);
 
         }
+
+        /// <summary>
+        /// the function maintans the service by putting log updates
+        /// </summary>
+        /// <param name="args"></param>
 
         protected override void OnStart(string[] args)
         {
@@ -91,22 +103,34 @@ namespace ImageService
 
         }
 
+        /// <summary>
+        /// the function writes to the log when the service stops 
+        /// </summary>
+
         protected override void OnStop()
         {
             this.logging.MessageRecieved -= this.Logwrite;
             eventLog1.WriteEntry("In onStop.");
         }
-        /*
-        protected override void OnContinue()
-        {
-            eventLog1.WriteEntry("In OnContinue.");
-        }
-        */
+
+        /// <summary>
+        /// the function writes to the log every minute
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
             // TODO: Insert monitoring activities here.  
             eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
         }
+
+        /// <summary>
+        /// the function writes to the log when the logging modal writes
+        /// a message via an event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void Logwrite(object sender, MessageRecievedEventArgs e)
         {

@@ -19,7 +19,7 @@ namespace ImageService.Controller
         private Dictionary<int, ICommand> commands;
 
         /// <summary>
-        /// the constructor. initialze m_modal and creats commands dictionary
+        /// the constructor. initialze m_modal and creates commands dictionary
         /// </summary>
         /// <param name="modal"></param>
         public ImageController(IImageServiceModal modal)
@@ -33,7 +33,7 @@ namespace ImageService.Controller
         }
 
         /// <summary>
-        /// if the command exist it will execute it.
+        /// if the command exist it will execute it using tasks.
         /// </summary>
         /// <param name="commandID"></param>
         /// <param name="args"></param>

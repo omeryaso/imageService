@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ImageService.Controller
 {
     /// <summary>
-    /// IImageController interface. resposible to execut the Command Requet
+    /// IImageController interface. resposible to execute the Command Requet
     /// </summary>
     public interface IImageController
     {

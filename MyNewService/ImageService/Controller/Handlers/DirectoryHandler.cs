@@ -45,9 +45,9 @@ namespace ImageService.Controller.Handlers
         public event EventHandler<DirectoryCloseEventArgs> DirectoryClose;              // The Event That Notifies that the Directory is being closed
 
         /// <summary>
-        /// OnCommandRecieved function will run when it will be called by the event when 
+        /// OnCommandRecieved function will be called by an event when 
         /// a command is recieved. it will activate the controller and write a log according to
-        /// the outcome(failure pr success)
+        /// the outcome(failure or success)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -66,7 +66,7 @@ namespace ImageService.Controller.Handlers
         }
 
         /// <summary>
-        /// 
+        /// starting the directory handlers
         /// </summary>
         /// <param name="dirPath"></param>
         public void StartHandleDirectory(string dirPath)
@@ -82,8 +82,8 @@ namespace ImageService.Controller.Handlers
         }
 
         /// <summary>
-        /// dirWatcherCreated function will run every time a file is channged/created
-        /// and will write logs
+        /// dirWatcherCreated function runs every time a file is channged/created
+        /// and writes logs
         /// </summary>
         /// <param name="src"></param>
         /// <param name="e"></param>
@@ -102,8 +102,8 @@ namespace ImageService.Controller.Handlers
         }
 
         /// <summary>
-        /// the funvtion will close the handler when the service is closed 
-        /// will stop directory listeninig and write the log the result .
+        /// the function closes the handler when the service is closed, 
+        /// stops directory listeners and writes the result to the log.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
