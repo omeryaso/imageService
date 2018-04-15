@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImageService.Controller
 {
+    /// <summary>
+    /// IImageController interface. resposible to execut the Command Requet
+    /// </summary>
     public interface IImageController
     {
         string ExecuteCommand(int commandID, string[] args, out bool result);          // Executing the Command Requet

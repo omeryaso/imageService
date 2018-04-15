@@ -10,11 +10,18 @@ using System.Threading.Tasks;
 
 namespace ImageService.Controller
 {
+    /// <summary>
+    /// ImageController implements IImageController
+    /// </summary>
     public class ImageController : IImageController
     {
         private IImageServiceModal m_modal;                      // The Modal Object
         private Dictionary<int, ICommand> commands;
 
+        /// <summary>
+        /// the constructor. initialze m_modal and creats commands dictionary
+        /// </summary>
+        /// <param name="modal"></param>
         public ImageController(IImageServiceModal modal)
         {
             m_modal = modal;                    // Storing the Modal Of The System
@@ -24,6 +31,14 @@ namespace ImageService.Controller
                 { (int)CommandEnum.NewFileCommand,new NewFileCommand(m_modal) }
             };
         }
+
+        /// <summary>
+        /// if the command exist it will execute it.
+        /// </summary>
+        /// <param name="commandID"></param>
+        /// <param name="args"></param>
+        /// <param name="resultSuccesful"></param>
+        /// <returns></returns>
         public string ExecuteCommand(int commandID, string[] args, out bool resultSuccesful)
         {
             if (commands.TryGetValue(commandID, out ICommand command))

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImageService.Controller.Handlers
 {
+    /// <summary>
+    /// IDirectoryHandler interface. will listen to folder.
+    /// </summary>
     public interface IDirectoryHandler
     {
         event EventHandler<DirectoryCloseEventArgs> DirectoryClose;              // The Event That Notifies that the Directory is being closed

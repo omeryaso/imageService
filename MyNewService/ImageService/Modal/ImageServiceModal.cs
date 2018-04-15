@@ -12,21 +12,32 @@ using System.Threading.Tasks;
 
 namespace ImageService.Modal
 {
+    /// <summary>
+    /// ImageServiceModal class implements IImageServiceModal
+    /// </summary>
     public class ImageServiceModal : IImageServiceModal
     {
         #region Members
         private string m_OutputFolder;            // The Output Folder
         private int m_thumbnailSize;              // The Size Of The Thumbnail Size
         #endregion
+
+        /// <summary>
+        /// comstrucotr
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="size"></param>
         public ImageServiceModal(string path, int size)
         {
             m_OutputFolder = path;
             m_thumbnailSize = size;
         }
 
+
         public ImageServiceModal()
         {
         }
+
 
         public string AddFile(string path, out bool result)
         {

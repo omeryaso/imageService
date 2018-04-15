@@ -14,6 +14,9 @@ using ImageService.Server;
 
 namespace ImageService.Controller.Handlers
 {
+    /// <summary>
+    ///  DirectoryHandler class  implements IDirectoryHandler
+    /// </summary>
     public class DirectoryHandler : IDirectoryHandler
     {
         #region Members
@@ -24,7 +27,12 @@ namespace ImageService.Controller.Handlers
         private readonly string[] extentions = { ".jpg", ".png", ".gif", ".bmp" };      // the filters
         #endregion
 
-
+        /// <summary>
+        /// the cunstructor
+        /// </summary>
+        /// <param name="m_controller"></param>
+        /// <param name="m_logging"></param>
+        /// <param name="m_path"></param>
         public DirectoryHandler(IImageController m_controller, ILoggingService m_logging, string m_path)
         {
             this.m_controller = m_controller;
@@ -36,6 +44,13 @@ namespace ImageService.Controller.Handlers
 
         public event EventHandler<DirectoryCloseEventArgs> DirectoryClose;              // The Event That Notifies that the Directory is being closed
 
+        /// <summary>
+        /// OnCommandRecieved function will run when it will be called by the event when 
+        /// a command is recieved. it will activate the controller and write a log according to
+        /// the outcome(failure pr success)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnCommandRecieved(object sender, CommandRecievedEventArgs e)
         {
             bool result;
@@ -50,6 +65,10 @@ namespace ImageService.Controller.Handlers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dirPath"></param>
         public void StartHandleDirectory(string dirPath)
         {
             //adding events and watchers
@@ -62,6 +81,12 @@ namespace ImageService.Controller.Handlers
 
         }
 
+        /// <summary>
+        /// dirWatcherCreated function will run every time a file is channged/created
+        /// and will write logs
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="e"></param>
         private void dirWatcherCreated(object src, FileSystemEventArgs e)
         {
             this.m_logging.Log("dirWatcherCreated: " + e.FullPath, MessageTypeEnum.INFO);
@@ -76,9 +101,15 @@ namespace ImageService.Controller.Handlers
 
         }
 
+        /// <summary>
+        /// the funvtion will close the handler when the service is closed 
+        /// will stop directory listeninig and write the log the result .
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void closeHandler(object sender, DirectoryCloseEventArgs e)
         {
-            // stop directory listeninig and writing to the log the result .
+            // stop directory listeninig and writing to the log the result.
             try
             {
                 this.m_dirWatcher.EnableRaisingEvents = false;

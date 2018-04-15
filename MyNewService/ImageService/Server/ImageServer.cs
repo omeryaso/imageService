@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace ImageService.Server
 {
+    /// <summary>
+    /// ImageServer class
+    /// </summary>
     public class ImageServer
     {
         #region Members
@@ -23,6 +26,11 @@ namespace ImageService.Server
         public event EventHandler<CommandRecievedEventArgs> CommandRecieved;          // The event that notifies about a new Command being recieved
         #endregion
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="m_controller"></param>
+        /// <param name="m_logging"></param>
         public ImageServer(IImageController m_controller, ILoggingService m_logging)
         {
             this.m_controller = m_controller;
@@ -35,6 +43,10 @@ namespace ImageService.Server
             }
         }
 
+        /// <summary>
+        /// CreateHandler creats a diractory handler
+        /// </summary>
+        /// <param name="directory"></param>
         private void CreateHandler(string directory)
         {
             IDirectoryHandler dHandler = new DirectoryHandler(m_controller, m_logging, directory);
@@ -43,12 +55,20 @@ namespace ImageService.Server
             dHandler.StartHandleDirectory(directory);
         }
 
+        /// <summary>
+        /// close a handler and updates the log
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="e"></param>
         public void HandlerClose (object src, DirectoryCloseEventArgs e)
         {
             CommandRecieved -= ((IDirectoryHandler)src).OnCommandRecieved;
             m_logging.Log("The handler has been closed", Logging.Modal.MessageTypeEnum.INFO);
         }
 
+        /// <summary>
+        /// close the server and updates the log
+        /// </summary>
         public void ServerClose()
         {
             CommandRecievedEventArgs commArgs = new CommandRecievedEventArgs((int)CommandEnum.CloseCommand, null, null);
