@@ -16,13 +16,14 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock  Padding="3" Margin="3" HorizontalAlignment="Center"
-                         Grid.Column="1"
                         FontSize="35"  Text="Settings" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             <TextBlock Grid.Row="2" Padding="3" Margin="3">Output Directory:</TextBlock>
             <TextBlock x:Name="outDirectory" Grid.Row="2" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
@@ -35,7 +36,8 @@
             <TextBlock Grid.Row="5" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
             <TextBlock x:Name="thumbSize" Grid.Row="5" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
-            <Button Content="Remove" Grid.Row="6" Grid.ColumnSpan="2" />
+            <Button x:Name="removeBtn" Content="Remove" Grid.Row="6" Grid.ColumnSpan="2" />
+            <ListBox x:Name="hndlrLst" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>
             
         </Grid>
 
