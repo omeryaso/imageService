@@ -1,0 +1,104 @@
+commit b8428c7d0c9f568573e5212ef6712072f04eb935
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun Apr 15 20:38:02 2018 +0300
+
+    Added more documantation
+
+commit 264df4055e9d6d157c484fd7708aa752aa6d2477
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Sun Apr 15 18:15:11 2018 +0300
+
+    functions documenting
+
+commit 7b694672100663e4f69f7ef824e6d59a4ba965c7
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Thu Apr 12 12:48:19 2018 +0300
+
+    Updated the Service so it will be runnable
+
+commit ae20f83e204e66afb43e52e571297cffdcddefce
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Thu Apr 12 12:45:26 2018 +0300
+
+    refactoring
+
+commit 453af4701b596b18f7d811212b98ed2159ce18c4
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Thu Apr 12 12:30:52 2018 +0300
+
+    implemanted the Image Modal and the FileCommand
+
+commit d50ca1c87051fcb818c95fc4b74ca1fe2b748180
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Thu Apr 12 12:29:52 2018 +0300
+
+    implmented the handlers class
+
+commit 3929c425e197039b49c5eb4a1fb875bfd8d0276e
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Apr 11 20:42:31 2018 +0300
+
+    implamanted the Controller class
+
+commit d4431d801d23792e8692076336526e0192288999
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Apr 11 20:13:30 2018 +0300
+
+    implemanted the server class
+
+commit d465dfc9eec533efa8056615d875cf8a321fa6d6
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Apr 11 18:33:24 2018 +0300
+
+    baaaaaaaaaaa
+
+commit 6eefa5fb961c6181dbf227adbc3f1c65d9f7c328
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Apr 11 16:43:26 2018 +0300
+
+    implemanted the logger
+    Added a ImageServiceModal class
+
+commit 776d80d0ca467be263c4e43bb7c034fb16896809
+Merge: 03b0d17 692f65c
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Wed Mar 28 18:38:04 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 03b0d17097a23ab76fde6334a38ab9549df841b7
+Merge: e1c469e 08610d4
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Wed Mar 28 18:37:56 2018 +0300
+
+    Merge
+
+commit 692f65c426076441eb7d1ac603ffcd079beed89b
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Mar 28 18:11:16 2018 +0300
+
+    Made a partition of all the files
+
+commit 08610d4bfca34143a6b6cbc473714def1aedce3c
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Mar 28 16:32:06 2018 +0300
+
+    Added a start pending log notofication
+
+commit e1c469e6bca5258983f264369e0344930be6b1a6
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Wed Mar 28 16:27:29 2018 +0300
+
+    testing
+
+commit 89820a189b06fd4fb99b0df6b947c5d07a3420ab
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Mar 28 15:56:11 2018 +0300
+
+    Initial commit
+
+commit 79915659da1701550c559b27af7fcc96028037cd
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed Mar 28 14:58:48 2018 +0300
+
+    Add .gitignore and .gitattributes.
