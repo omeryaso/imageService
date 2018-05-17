@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ImageServiceGUI.Model;
+using ImageServiceGUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,14 @@ namespace ImageServiceGUI
     /// </summary>
     public partial class LogsView : UserControl
     {
+        LogsViewModel vm;
+
         public LogsView()
         {
             InitializeComponent();
+            this.DataContext = new LogsViewModel();
+            //vm = new LogsViewModel(new LogsModel());
+            //DataContext = vm;
         }
     }
 }

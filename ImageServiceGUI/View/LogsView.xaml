@@ -23,7 +23,10 @@
                         FontSize="35"  Text="Logs" VerticalAlignment="Top" Grid.ColumnSpan="2" />
             <TextBlock Grid.Row="2" Padding="3" Margin="3">Type</TextBlock>
             <TextBlock x:Name="outDirectory" Grid.Row="2" Grid.Column="2" Padding="3" Margin="3">Message</TextBlock>
-            <ListBox x:Name="hndlrLst" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>
+            <!--<ListBox x:Name="hndlrLst" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>-->
+            <DataGrid Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_LogsList}">
+                
+            </DataGrid>
 
         </Grid>
 
