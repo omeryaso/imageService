@@ -30,7 +30,7 @@ namespace ImageServiceGUI
             DataContext = vm;
         }
 
-        private void removeBtn_Click(object sender, RoutedEventArgs e)
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
             vm.VM_HandlerClose((string)lstBox.SelectedItem);
         }

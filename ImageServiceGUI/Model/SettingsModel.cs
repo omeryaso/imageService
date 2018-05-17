@@ -16,9 +16,11 @@ namespace ImageServiceGUI.Model
             SrcName = "The";
             LogName = "King";
             ThumbSize = "!!!";
-            Handlers = new ObservableCollection<string>();
-            Handlers.Add("Moshik");
-            Handlers.Add("Barvaz");
+            Handlers = new ObservableCollection<string>
+            {
+                "Moshik",
+                "Barvaz"
+            };
         }
 
         private string outDirectory;
@@ -58,8 +60,7 @@ namespace ImageServiceGUI.Model
 
         private void NotifyPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
         public void HandlerClose(string handler)
