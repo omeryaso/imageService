@@ -25,18 +25,18 @@
         <TextBlock  Padding="3" Margin="3" HorizontalAlignment="Center"
                         FontSize="35"  Text="Settings" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <TextBlock Grid.Row="1" Padding="3" Margin="3">Output Directory:</TextBlock>
-        <TextBlock x:Name="outDirectory" Grid.Row="1" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
+        <TextBlock Text="{Binding VM_OutDirectory}" Grid.Row="1" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
         <TextBlock Grid.Row="2" Padding="3" Margin="3">Source Name:</TextBlock>
-        <TextBlock x:Name="srcName" Grid.Row="2" Grid.Column="2" Padding="3"
+        <TextBlock Text="{Binding VM_SrcName}" Grid.Row="2" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
         <TextBlock Grid.Row="3" Padding="3" Margin="3">Log Name:</TextBlock>
-        <TextBlock x:Name="lgName" Grid.Row="3" Grid.Column="2" Padding="3"
+        <TextBlock Text="{Binding VM_LogName}" Grid.Row="3" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
         <TextBlock Grid.Row="4" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
-        <TextBlock x:Name="thumbSize" Grid.Row="4" Grid.Column="2" Padding="3"
+        <TextBlock Text="{Binding VM_ThumbSize}" Grid.Row="4" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
-        <Button x:Name="removeBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" />
-        <ListBox x:Name="hndlrLst" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>
+        <Button  x:Name="removeBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" Click="removeBtn_Click" />
+        <ListBox x:Name="lstBox" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_Handlers}" ></ListBox>
 
     </Grid>
 </UserControl>

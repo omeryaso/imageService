@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ImageServiceGUI.Model;
+using ImageServiceGUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,17 @@ namespace ImageServiceGUI
     /// </summary>
     public partial class SettingsView : UserControl
     {
+        SettingsViewModel vm;
         public SettingsView()
         {
             InitializeComponent();
+            vm = new SettingsViewModel(new SettingsModel());
+            DataContext = vm;
+        }
+
+        private void removeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            vm.VM_HandlerClose((string)lstBox.SelectedItem);
         }
     }
 }
