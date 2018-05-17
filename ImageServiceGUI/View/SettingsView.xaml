@@ -6,40 +6,37 @@
              xmlns:local="clr-namespace:ImageServiceGUI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid TextBlock.FontSize="14">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
 
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock  Padding="3" Margin="3" HorizontalAlignment="Center"
+    <Grid TextBlock.FontSize="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock  Padding="3" Margin="3" HorizontalAlignment="Center"
                         FontSize="35"  Text="Settings" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-            <TextBlock Grid.Row="2" Padding="3" Margin="3">Output Directory:</TextBlock>
-            <TextBlock x:Name="outDirectory" Grid.Row="2" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
-            <TextBlock Grid.Row="3" Padding="3" Margin="3">Source Name:</TextBlock>
-            <TextBlock x:Name="srcName" Grid.Row="3" Grid.Column="2" Padding="3"
+        <TextBlock Grid.Row="1" Padding="3" Margin="3">Output Directory:</TextBlock>
+        <TextBlock x:Name="outDirectory" Grid.Row="1" Grid.Column="2" Padding="3" Margin="3"></TextBlock>
+        <TextBlock Grid.Row="2" Padding="3" Margin="3">Source Name:</TextBlock>
+        <TextBlock x:Name="srcName" Grid.Row="2" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
-            <TextBlock Grid.Row="4" Padding="3" Margin="3">Log Name:</TextBlock>
-            <TextBlock x:Name="lgName" Grid.Row="4" Grid.Column="2" Padding="3"
+        <TextBlock Grid.Row="3" Padding="3" Margin="3">Log Name:</TextBlock>
+        <TextBlock x:Name="lgName" Grid.Row="3" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
-            <TextBlock Grid.Row="5" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
-            <TextBlock x:Name="thumbSize" Grid.Row="5" Grid.Column="2" Padding="3"
+        <TextBlock Grid.Row="4" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
+        <TextBlock x:Name="thumbSize" Grid.Row="4" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
-            <Button x:Name="removeBtn" Content="Remove" Grid.Row="6" Grid.ColumnSpan="2" />
-            <ListBox x:Name="hndlrLst" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>
-            
-        </Grid>
+        <Button x:Name="removeBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" />
+        <ListBox x:Name="hndlrLst" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>
 
-    </Grid>
+    </Grid>
 </UserControl>
