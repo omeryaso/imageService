@@ -12,15 +12,18 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock  Padding="3" Margin="3" HorizontalAlignment="Center"
-                        FontSize="35"  Text="Logs" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-            <TextBlock Grid.Row="4" Padding="3" Margin="3">Type</TextBlock>
-            <TextBlock Grid.Row="4" Padding="3" Margin="3">Message</TextBlock>           
+                        FontSize="35"  Text="Logs" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+            <TextBlock Grid.Row="2" Padding="3" Margin="3">Type</TextBlock>
+            <TextBlock x:Name="outDirectory" Grid.Row="2" Grid.Column="2" Padding="3" Margin="3">Message</TextBlock>
+            <ListBox x:Name="hndlrLst" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>
 
         </Grid>
 
