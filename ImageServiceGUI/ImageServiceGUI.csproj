@@ -59,6 +59,7 @@
     <Compile Include="Model\LogsModel.cs" />
     <Compile Include="Model\SettingsModel.cs" />
     <Compile Include="ViewModel\LogsViewModel.cs" />
+    <Compile Include="ViewModel\MessageColorConvertor.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\LogsView.xaml.cs">
       <DependentUpon>LogsView.xaml</DependentUpon>

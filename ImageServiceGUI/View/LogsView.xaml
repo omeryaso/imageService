@@ -3,29 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ImageServiceGUI"
+             xmlns:local="clr-namespace:ImageServiceGUI.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:MessageColorConvertor x:Key="MessageColorConvertor"/>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid TextBlock.FontSize="14">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-
             </Grid.RowDefinitions>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock  Padding="3" Margin="3" HorizontalAlignment="Center"
-                        FontSize="35"  Text="Logs" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-            <TextBlock Grid.Row="2" Padding="3" Margin="3">Type</TextBlock>
-            <TextBlock x:Name="outDirectory" Grid.Row="2" Grid.Column="2" Padding="3" Margin="3">Message</TextBlock>
+
+            <TextBlock
+                Padding="3" Margin="3" HorizontalAlignment="Center"
+                FontSize="35"  Text="Logs" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+            </TextBlock>
+
             <!--<ListBox x:Name="hndlrLst" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ></ListBox>-->
-            <DataGrid Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_LogsList}">
-                
+
+            <DataGrid
+                Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_LogsList}"  AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Type" IsReadOnly="True" Width="Auto"  Binding="{Binding LogStatus}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Background" Value="{Binding Path=Type, Converter={StaticResource MessageColorConvertor}}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Header="Message" Width="*" IsReadOnly="True" Binding="{Binding Message}"></DataGridTextColumn>
+                </DataGrid.Columns>
             </DataGrid>
 
         </Grid>

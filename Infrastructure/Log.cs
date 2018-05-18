@@ -11,9 +11,9 @@ namespace Infrastructure
       
         public MessageTypeEnum Type { get; set; }
         public string Message { get; set; }
-        public Log(MessageTypeEnum Status, string Message)
+        public Log(MessageTypeEnum Type, string Message)
         {
-            this.Type = Status;
+            this.Type = Type;
             this.Message = Message;
         }
     }

@@ -22,7 +22,7 @@ namespace ImageServiceGUI
     /// </summary>
     public partial class LogsView : UserControl
     {
-        LogsViewModel vm;
+        //LogsViewModel vm;
 
         public LogsView()
         {

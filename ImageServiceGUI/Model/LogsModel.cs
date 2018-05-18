@@ -26,10 +26,10 @@ namespace ImageServiceGUI.Model
         public LogsModel()
         {
             logList = new ObservableCollection<Log>();
-            logList.Add(new Log((int)MessageTypeEnum.INFO, "hello every1"));
-            logList.Add(new Log((int)MessageTypeEnum.INFO, "hello every2"));
-            logList.Add(new Log((int)MessageTypeEnum.INFO, "hello every3"));
-            logList.Add(new Log((int)MessageTypeEnum.INFO, "hello every4"));
+            logList.Add(new Log(MessageTypeEnum.INFO, "hello every1"));
+            logList.Add(new Log(MessageTypeEnum.FAIL, "hello every2"));
+            logList.Add(new Log(MessageTypeEnum.WARNING, "hello every3"));
+            logList.Add(new Log(MessageTypeEnum.INFO, "hello every4"));
         }
 
         private void NotifyPropertyChanged(string propName)
