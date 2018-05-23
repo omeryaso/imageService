@@ -113,7 +113,7 @@ namespace ImageService.Controller.Handlers
             try
             {
                 this.m_dirWatcher.EnableRaisingEvents = false;
-                ((ImageServer)sender).CommandRecieved -= this.OnCommandRecieved;
+               // ((ImageServer)sender).CommandRecieved -= this.OnCommandRecieved;
                 this.m_logging.Log("closeHandler succesfully  " + this.m_path, MessageTypeEnum.INFO);
             }
             catch (Exception ex)
