@@ -1,37 +1,33 @@
 ﻿using ImageServiceGUI.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure;
 
 namespace ImageServiceGUI.ViewModel
 {
-    class LogsViewModel : INotifyPropertyChanged
+    class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private ILogsModel logsModel;
-        public ObservableCollection<Log> VM_LogsList
-        {
-            get { return logsModel.LogList; }
-        }
+        private IMainWindowModel model;
 
-        public LogsViewModel()
+        public MainWindowViewModel(IMainWindowModel model)
         {
-            this.logsModel = new LogsModel();
-            logsModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            this.model = model;
+            model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
-
         }
 
         private void NotifyPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+
+        public string VM_Background { get { return model.Background; } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

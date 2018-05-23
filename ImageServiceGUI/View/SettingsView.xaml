@@ -35,7 +35,7 @@
         <TextBlock Grid.Row="4" Padding="3" Margin="3">Thumbnail Size:</TextBlock>
         <TextBlock Text="{Binding VM_ThumbSize}" Grid.Row="4" Grid.Column="2" Padding="3"
                      Margin="3"></TextBlock>
-        <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" Click="RemoveBtn_Click" />
+        <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" />
         <ListBox x:Name="lstBox" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_Handlers}" ></ListBox>
 
     </Grid>
