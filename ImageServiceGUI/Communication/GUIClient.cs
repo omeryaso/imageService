@@ -67,8 +67,6 @@ namespace ImageServiceGUI
                         NetworkStream stream = client.GetStream();
                         BinaryReader reader = new BinaryReader(stream);
                         string answer = "humus";
-                        try { 
-}
                         Console.WriteLine(answer);
                         answer = reader.ReadString();
                         Console.WriteLine("message is: " + answer);

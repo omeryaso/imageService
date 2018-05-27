@@ -29,10 +29,10 @@ namespace ImageServiceGUI.Model
         }
         public LogsModel()
         {
-            Client = GUIClient.Instance;
-            Client.RecieveMessage();
-            Client.UpdateData += UpdateData;
-            StartLogs();
+            //Client = GUIClient.Instance;
+            //Client.RecieveMessage();
+            //Client.UpdateData += UpdateData;
+            //StartLogs();
         }
 
         private void StartLogs()

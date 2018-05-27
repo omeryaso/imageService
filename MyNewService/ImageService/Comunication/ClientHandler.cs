@@ -54,9 +54,9 @@ namespace ImageService
 
                             string command = imageController.ExecuteCommand((int)commandRecievedEventArgs.CommandID, commandRecievedEventArgs.Args, out bool result);
                             logging.Log("exe1111 command:" + command, MessageTypeEnum.INFO);
-                            Mutex.WaitOne();
+                            //Mutex.WaitOne();
                             writer.Write(command);
-                            Mutex.ReleaseMutex();
+                            //Mutex.ReleaseMutex();
                         }
                     }
                     catch (Exception e) {
