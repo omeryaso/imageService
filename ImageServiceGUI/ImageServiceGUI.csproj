@@ -124,10 +124,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{b126f3b4-cdf4-4e5d-84cc-a21ee2759332}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyNewService\ImageService.csproj">
       <Project>{95a8aaad-4035-4fca-b975-48630231797b}</Project>
       <Name>ImageService</Name>

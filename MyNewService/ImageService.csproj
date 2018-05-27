@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ImageService.Infrastructure\Enums\CommandEnum.cs" />
     <Compile Include="ILoggingService.cs" />
+    <Compile Include="ImageService.Logging\Log.cs" />
     <Compile Include="ImageService.Logging\LoggingService.cs" />
     <Compile Include="ImageService.Logging\Modal\MessageRecievedEventArgs.cs" />
     <Compile Include="ImageService.Logging\Modal\MessageTypeEnum.cs" />
@@ -107,11 +108,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{b126f3b4-cdf4-4e5d-84cc-a21ee2759332}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
