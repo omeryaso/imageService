@@ -8,11 +8,11 @@ namespace ImageService.Infrastructure.Enums
 {
     public enum CommandEnum : int
     {
-        NewFileCommand,
-        CloseCommand,
-        GetConfigCommand,
-        LogCommand,        DisconnectClient,
-        HandlerShutDown,
-        NewLog
+        NewFileCommand = 0,
+        CloseCommand = 1,
+        GetConfigCommand = 2,
+        LogCommand = 3,        DisconnectClient = 4,
+        HandlerShutDown = 5,
+        NewLog = 6
     }
 }

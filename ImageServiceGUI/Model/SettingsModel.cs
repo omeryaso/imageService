@@ -137,7 +137,7 @@ namespace ImageServiceGUI.Model
         {
             Console.WriteLine(handler);
             string[] Args = { handler };
-            CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.HandlerShudDownCommand, Args, handler);
+            CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.HandlerShutDown, Args, handler);
             Client.SendMessage(commandRecievedEventArgs);
         }
     }

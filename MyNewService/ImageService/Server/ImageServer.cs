@@ -23,7 +23,11 @@ namespace ImageService.Server
         #endregion
 
         #region Properties
+        public delegate void NotifyClients(CommandRecievedEventArgs msg);
+        public static event NotifyClients NotifyHandlersRemoved;
+        public event EventHandler<DirectoryCloseEventArgs> CloseServer;
         public event EventHandler<CommandRecievedEventArgs> CommandRecieved;          // The event that notifies about a new Command being recieved
+        public Dictionary<string, IDirectoryHandler> Handlers { get; set; }
         #endregion
 
         /// <summary>
@@ -34,6 +38,7 @@ namespace ImageService.Server
         public ImageServer(IImageController m_controller, ILoggingService m_logging)
         {
             this.m_controller = m_controller;
+            this.Handlers = new Dictionary<string, IDirectoryHandler>();
             this.m_logging = m_logging;
             string[] directories = (ConfigurationManager.AppSettings.Get("Handler").Split(';'));
             // creates an handler for each directory
@@ -50,9 +55,26 @@ namespace ImageService.Server
         private void CreateHandler(string directory)
         {
             IDirectoryHandler dHandler = new DirectoryHandler(m_controller, m_logging, directory);
+            Handlers[directory] = dHandler;
             CommandRecieved += dHandler.OnCommandRecieved;
             dHandler.DirectoryClose += HandlerClose;
             dHandler.StartHandleDirectory(directory);
+        }
+
+        public static void PerformSomeEvent(CommandRecievedEventArgs commandRecievedEventArgs)
+        {
+            NotifyHandlersRemoved.Invoke(commandRecievedEventArgs);
+        }
+
+        public void CloseHandler(string handler)
+        {
+            if (Handlers.ContainsKey(handler))
+            {
+                IDirectoryHandler newHandler = Handlers[handler];
+                this.CloseServer -= newHandler.closeHandler;
+                newHandler.closeHandler(this, null);
+            }
+
         }
 
         /// <summary>

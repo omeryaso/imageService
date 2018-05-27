@@ -47,6 +47,7 @@ namespace ImageService
         private IImageServiceModal modal;
         private IImageController contr;
         private ILoggingService logging;
+        private ImgServer imgServer;
         private System.ComponentModel.IContainer components;
         private System.Diagnostics.EventLog eventLog1;
         private int eventId = 1;
@@ -74,7 +75,11 @@ namespace ImageService
             this.modal = new ImageServiceModal(ConfigurationManager.AppSettings["OutputDir"], Int32.Parse(ConfigurationManager.AppSettings.Get("ThumbnailSize")));
             this.contr = new ImageController(this.modal);
             this.m_imageServer = new ImageServer(this.contr, this.logging);
-
+            IClientHandler clientHandler = new ClientHandler(contr, logging);
+            this.imgServer =  new ImgServer(8000, clientHandler, logging );
+            ImageServer.NotifyHandlersRemoved += imgServer.NotifyClients;
+            this.logging.LogsUpdate += imgServer.NotifyClients;
+            imgServer.Start();
         }
 
         /// <summary>
