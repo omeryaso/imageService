@@ -9,6 +9,6 @@ namespace ImageService
 {
     public interface IClientHandler
     {
-        void HandleClient(TcpClient client);
+        void HandleClient(TcpClient client, List<TcpClient> clients);
     }
 }
