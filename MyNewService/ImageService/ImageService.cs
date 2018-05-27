@@ -73,7 +73,7 @@ namespace ImageService
             this.logging = new LoggingService();
             this.logging.MessageRecieved += this.Logwrite;
             this.modal = new ImageServiceModal(ConfigurationManager.AppSettings["OutputDir"], Int32.Parse(ConfigurationManager.AppSettings.Get("ThumbnailSize")));
-            this.contr = new ImageController(this.modal);
+            this.contr = new ImageController(this.modal,logging);
             this.m_imageServer = new ImageServer(this.contr, this.logging);
             IClientHandler clientHandler = new ClientHandler(contr, logging);
             this.imgServer =  new ImgServer(8000, clientHandler, logging );
@@ -127,7 +127,7 @@ namespace ImageService
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
             // TODO: Insert monitoring activities here.  
-            eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
+            //eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
         }
 
         /// <summary>

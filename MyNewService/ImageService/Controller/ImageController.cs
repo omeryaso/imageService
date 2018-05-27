@@ -1,6 +1,8 @@
 ﻿using ImageService.Commands;
 using ImageService.Infrastructure;
 using ImageService.Infrastructure.Enums;
+using ImageService.Logging;
+using ImageService.Logging.Modal;
 using ImageService.Modal;
 using ImageService.Server;
 using System;
@@ -19,18 +21,23 @@ namespace ImageService.Controller
         private IImageServiceModal m_modal;                      // The Modal Object
         private Dictionary<int, ICommand> commands;
         private ImageServer imageServer;
+        private ILoggingService logging;
 
         /// <summary>
         /// the constructor. initialze m_modal and creates commands dictionary
         /// </summary>
         /// <param name="modal"></param>
-        public ImageController(IImageServiceModal modal)
+        public ImageController(IImageServiceModal modal, ILoggingService logging)
         {
+            this.logging = logging;
             m_modal = modal;                    // Storing the Modal Of The System
             commands = new Dictionary<int, ICommand>()
             {
-                // For Now will contain NEW_FILE_COMMAND
-                { (int)CommandEnum.NewFileCommand,new NewFileCommand(m_modal) }
+                { (int)CommandEnum.NewFileCommand,new NewFileCommand(m_modal)},
+                { (int)CommandEnum.CloseCommand,new CloseCommand()},
+                { (int)CommandEnum.GetConfigCommand,new GetConfigCommand()},
+                { (int)CommandEnum.LogCommand,new LogCommand(logging)},
+                { (int)CommandEnum.HandlerShutDown,new HandlerShutDownCommand (imageServer)},
             };
         }
 

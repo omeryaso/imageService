@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ImageServiceGUI
 {
@@ -65,15 +66,20 @@ namespace ImageServiceGUI
                     {
                         NetworkStream stream = client.GetStream();
                         BinaryReader reader = new BinaryReader(stream);
-                        string answer = reader.ReadString();
+                        string answer = "humus";
+                        try { 
+}
+                        Console.WriteLine(answer);
+                        answer = reader.ReadString();
+                        Console.WriteLine("message is: " + answer);
                         Console.WriteLine($"Recieve {answer} from Server");
                         CommandRecievedEventArgs answerObject = JsonConvert.DeserializeObject<CommandRecievedEventArgs>(answer);
                         UpdateData?.Invoke(answerObject);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Error in trying to reading to the client");
+                    Console.WriteLine("Error in trying to reading to the client ");
                 }
             }).Start();
         }
@@ -87,11 +93,17 @@ namespace ImageServiceGUI
                 NetworkStream stream = client.GetStream();
                 BinaryWriter writer = new BinaryWriter(stream);
                 string json = JsonConvert.SerializeObject(msg);
-                Console.WriteLine($"Send {json} to Server");
-                lock (Clientmutex)
-                    {
+                 //   MessageBox.Show(json);
+                Console.WriteLine($"Send1 {json} to Server");
+                    Clientmutex.WaitOne();
+                    try {
                         writer.Write(json);
                     }
+                    catch (Exception)
+                    {
+                //        MessageBox.Show(json+"bla");
+                    }
+                    Clientmutex.ReleaseMutex();
                 }
                 catch (Exception)
                 {

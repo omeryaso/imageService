@@ -20,8 +20,8 @@ namespace ImageService
     {
         private IImageController imageController;
         private ILoggingService logging;
-        private static Mutex readMutex = new Mutex();
-        private static Mutex writeMutex = new Mutex();
+        public static Mutex Mutex { get; set; }
+        //private static Mutex writeMutex = new Mutex();
 
         public ClientHandler (IImageController imageController, ILoggingService loggingService)
         {
@@ -44,7 +44,6 @@ namespace ImageService
 
                         {
                             string commandLine = reader.ReadString();
-                            Console.WriteLine("Got command: {0}", commandLine);
                             CommandRecievedEventArgs commandRecievedEventArgs = JsonConvert.DeserializeObject<CommandRecievedEventArgs>(commandLine);
                             if (commandRecievedEventArgs.CommandID == (int)CommandEnum.DisconnectClient)
                             {
@@ -54,9 +53,10 @@ namespace ImageService
                             }
 
                             string command = imageController.ExecuteCommand((int)commandRecievedEventArgs.CommandID, commandRecievedEventArgs.Args, out bool result);
-                            lock (writeMutex) {
-                                writer.Write(command);
-                            }
+                            logging.Log("exe1111 command:" + command, MessageTypeEnum.INFO);
+                            Mutex.WaitOne();
+                            writer.Write(command);
+                            Mutex.ReleaseMutex();
                         }
                     }
                     catch (Exception e) {
