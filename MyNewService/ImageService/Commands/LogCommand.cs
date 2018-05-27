@@ -23,26 +23,18 @@ namespace ImageService.Commands
 
         public string Execute(string[] args, out bool result)
         {
-            // ObservableCollection<Log> logMessages = this.loggingService.Log;
-
-            // return JsonConvert.SerializeObject();
-
             try
             {
                 ObservableCollection<Log> logMessages = logging.LogsCollection;
-                // serialize the log entries list to json string.
-                string jsonLogMessages = JsonConvert.SerializeObject(logMessages);
-                string[] arr = new string[1];
-                arr[0] = jsonLogMessages;
+                string[] arr = { JsonConvert.SerializeObject(logMessages)};
                 CommandRecievedEventArgs commandSendArgs = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, arr, "");
                 result = true;
-                // serialize the commandSendArgs to json string.
                 return JsonConvert.SerializeObject(commandSendArgs);
             }
             catch (Exception e)
             {
                 result = false;
-                return "LogCommand.Execute: Failed execute log command";
+                return "LogCommand: " + e.Message;
             }
         }
     }

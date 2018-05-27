@@ -2,6 +2,7 @@
 using ImageService.Infrastructure;
 using ImageService.Infrastructure.Enums;
 using ImageService.Modal;
+using ImageService.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace ImageService.Controller
     {
         private IImageServiceModal m_modal;                      // The Modal Object
         private Dictionary<int, ICommand> commands;
+        private ImageServer imageServer;
 
         /// <summary>
         /// the constructor. initialze m_modal and creates commands dictionary
@@ -30,6 +32,15 @@ namespace ImageService.Controller
                 // For Now will contain NEW_FILE_COMMAND
                 { (int)CommandEnum.NewFileCommand,new NewFileCommand(m_modal) }
             };
+        }
+
+        public ImageServer ImageServer
+        {
+            get { return imageServer; }
+            set {
+                this.imageServer = value;
+                this.commands[((int)CommandEnum.HandlerShutDown)] = new HandlerShutDownCommand(imageServer);
+            }
         }
 
         /// <summary>
