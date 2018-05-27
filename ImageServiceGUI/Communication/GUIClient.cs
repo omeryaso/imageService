@@ -1,11 +1,15 @@
-﻿using ImageService.Modal;
+﻿using ImageService.Infrastructure.Enums;
+using ImageService.Modal;
 using ImageServiceGUI.Communication;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ImageServiceGUI
@@ -13,7 +17,9 @@ namespace ImageServiceGUI
     class GUIClient : IGUIClient
     {
         private static GUIClient instance;
+        private bool isStopped;
         bool IsConnected { get; set; }
+        private static Mutex Clientmutex = new Mutex();
         private TcpClient client;
         private GUIClient()
         {
@@ -38,6 +44,8 @@ namespace ImageServiceGUI
                 IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
                 client = new TcpClient();
                 client.Connect(ep);
+                Console.WriteLine("The client is connected");
+                isStopped = false;
                 return true;
             }            catch(Exception exception)
             {
@@ -47,17 +55,57 @@ namespace ImageServiceGUI
 
         public void RecieveMessage()
         {
-            throw new NotImplementedException();
+            new Task(() =>
+            {
+                try
+                {
+                    while (!isStopped)
+                    {
+                        NetworkStream stream = client.GetStream();
+                        BinaryReader reader = new BinaryReader(stream);
+                        string answer = reader.ReadString();
+                        Console.WriteLine($"Recieve {answer} from Server");
+                        CommandRecievedEventArgs answerObject = JsonConvert.DeserializeObject<CommandRecievedEventArgs>(answer);
+                        UpdateData?.Invoke(answerObject);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error in trying to reading to the client");
+                }
+            }).Start();
         }
 
         public void SendMessage(CommandRecievedEventArgs msg)
         {
-            throw new NotImplementedException();
+            new Task(() =>
+            {
+                try
+                {
+                NetworkStream stream = client.GetStream();
+                BinaryWriter writer = new BinaryWriter(stream);
+                string json = JsonConvert.SerializeObject(msg);
+                Console.WriteLine($"Send {json} to Server");
+                lock (Clientmutex)
+                    {
+                        writer.Write(json);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error in trying to write to the client");
+                }
+
+            }).Start();
         }
 
         public void CloseClient()
         {
-            throw new NotImplementedException();
+            CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.DisconnectClient, null, "");
+            SendMessage(commandRecievedEventArgs);
+            client.Close();
+            isStopped = true;
+
         }
     }
 }
