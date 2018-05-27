@@ -75,7 +75,7 @@ namespace ImageService
                                 writer.Write(jsonCommand);
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             this.clients.Remove(client);
                         }

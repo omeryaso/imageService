@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageServiceGUI.Communication;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ namespace ImageServiceGUI.Model
 {
     interface ISettingsModel : INotifyPropertyChanged
     {
+        IGUIClient Client { get; set; }
         string OutDirectory { get; set; }
         string SrcName { get; set; }
         string LogName { get; set; }

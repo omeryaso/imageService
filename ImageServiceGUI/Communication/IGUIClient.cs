@@ -11,6 +11,7 @@ namespace ImageServiceGUI.Communication
 
     interface IGUIClient
     {
+        bool IsConnected { get; set; }
         bool Start();
         void SendMessage(CommandRecievedEventArgs msg);
         void RecieveMessage();

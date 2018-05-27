@@ -16,9 +16,9 @@ namespace ImageServiceGUI
 {
     class GUIClient : IGUIClient
     {
+        public bool IsConnected { get; set; }
         private static GUIClient instance;
         private bool isStopped;
-        bool IsConnected { get; set; }
         private static Mutex Clientmutex = new Mutex();
         private TcpClient client;
         private GUIClient()
@@ -35,6 +35,8 @@ namespace ImageServiceGUI
                 return instance;
             }
         }
+
+       // bool IGUIClient.IsConnected { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event UpdateDataIn UpdateData;
         public bool Start()
@@ -69,7 +71,7 @@ namespace ImageServiceGUI
                         UpdateData?.Invoke(answerObject);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.WriteLine("Error in trying to reading to the client");
                 }
@@ -91,7 +93,7 @@ namespace ImageServiceGUI
                         writer.Write(json);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.WriteLine("Error in trying to write to the client");
                 }

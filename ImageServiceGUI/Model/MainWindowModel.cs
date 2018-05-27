@@ -16,10 +16,13 @@ namespace ImageServiceGUI.Model
         public MainWindowModel()
         {
             Client = GUIClient.Instance;
-            isConnected = true;
-            Background = "White";
-            isConnected = false;
-            //Background = "Gray";
+            isConnected = Client.IsConnected;
+            if (isConnected)
+                Background = "White";
+            else
+            {
+                Background = "Gray";
+            }
         }
         public string Background { get { return background; }
             set { background = value;
