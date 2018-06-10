@@ -29,6 +29,7 @@ namespace ImageService
             this.clientHandler = clientHandler;
             this.port = port;
             this.loggingService = loggingService;
+            ClientHandler.Mutex = writeMutex;
         }
 
         public void Start()

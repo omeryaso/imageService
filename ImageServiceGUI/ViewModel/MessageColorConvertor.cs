@@ -14,21 +14,22 @@ namespace ImageServiceGUI.ViewModel
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (targetType != typeof(Brush))
-                throw new InvalidOperationException("Only Brush type is allowd");
-
-            MessageTypeEnum messageType = (MessageTypeEnum)value;
-            switch (messageType)
+            if (targetType.Name != "Brush")
             {
-                case MessageTypeEnum.INFO:
-                    return Brushes.Green;
-                case MessageTypeEnum.FAIL:
-                    return Brushes.Red;
-                case MessageTypeEnum.WARNING:
-                    return Brushes.Yellow;
-                default:
-                    return Brushes.Transparent;
+                throw new InvalidOperationException("Must convert to a brush!");
             }
+
+            string type = (string)value;
+            switch (type)
+            {
+                case "INFO":
+                    return System.Windows.Media.Brushes.LightGreen;
+                case "WARNING":
+                    return System.Windows.Media.Brushes.Yellow;
+                case "FAIL":
+                    return System.Windows.Media.Brushes.Coral;
+            }
+            return Brushes.Transparent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

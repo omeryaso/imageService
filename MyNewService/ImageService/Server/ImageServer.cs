@@ -66,15 +66,21 @@ namespace ImageService.Server
             NotifyHandlersRemoved.Invoke(commandRecievedEventArgs);
         }
 
-        public void CloseHandler(string handler)
+        internal void CloseHandler(string handler)
         {
-            if (Handlers.ContainsKey(handler))
+            try
             {
-                IDirectoryHandler newHandler = Handlers[handler];
-                this.CloseServer -= newHandler.closeHandler;
-                newHandler.closeHandler(this, null);
+                if (Handlers.ContainsKey(handler))
+                {
+                    m_logging.Log("The handler is " + handler, Logging.Modal.MessageTypeEnum.INFO);
+                    IDirectoryHandler newHandler = Handlers[handler];
+                    this.CloseServer -= newHandler.closeHandler;
+                    newHandler.closeHandler(this, null);
+                }
             }
-
+            catch (Exception ex)
+            {
+                m_logging.Log("Error in " + ex, Logging.Modal.MessageTypeEnum.FAIL);            }
         }
 
         /// <summary>

@@ -27,28 +27,22 @@ namespace ImageService.Controller
         /// the constructor. initialze m_modal and creates commands dictionary
         /// </summary>
         /// <param name="modal"></param>
-        public ImageController(IImageServiceModal modal, ILoggingService logging)
+        public ImageController(IImageServiceModal modal, ILoggingService logging,ImageServer server)
         {
             this.logging = logging;
-            m_modal = modal;                    // Storing the Modal Of The System
+            m_modal = modal;
+            imageServer = server;// Storing the Modal Of The System
             commands = new Dictionary<int, ICommand>()
             {
                 { (int)CommandEnum.NewFileCommand,new NewFileCommand(m_modal)},
                 { (int)CommandEnum.CloseCommand,new CloseCommand()},
                 { (int)CommandEnum.GetConfigCommand,new GetConfigCommand()},
                 { (int)CommandEnum.LogCommand,new LogCommand(logging)},
-                { (int)CommandEnum.HandlerShutDown,new HandlerShutDownCommand (imageServer)},
+                { (int)CommandEnum.HandlerShutDown,new HandlerShutDownCommand (imageServer,logging)}
             };
         }
 
-        public ImageServer ImageServer
-        {
-            get { return imageServer; }
-            set {
-                this.imageServer = value;
-                this.commands[((int)CommandEnum.HandlerShutDown)] = new HandlerShutDownCommand(imageServer);
-            }
-        }
+
 
         /// <summary>
         /// if the command exist it will execute it using tasks.

@@ -1,4 +1,6 @@
 ﻿using ImageService.Infrastructure.Enums;
+using ImageService.Logging;
+using ImageService.Logging.Modal;
 using ImageService.Modal;
 using ImageService.Server;
 using System;
@@ -13,10 +15,12 @@ namespace ImageService.Commands
     class HandlerShutDownCommand : ICommand
     {
         private ImageServer server;
+        private ILoggingService logging;
 
-        public HandlerShutDownCommand(ImageServer server)
+        public HandlerShutDownCommand(ImageServer server, ILoggingService logging)
         {
             this.server = server;
+            this.logging = logging;
         }
 
         public string Execute(string[] args, out bool result)
@@ -39,6 +43,8 @@ namespace ImageService.Commands
                     }
                 }
                 string newHandlers = (sbNewHandlers.ToString()).TrimEnd(';');
+                logging.Log("newhandlers: "+newHandlers, MessageTypeEnum.INFO);
+                logging.Log("old : " + handler, MessageTypeEnum.INFO);
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 // Add an Application Setting.
                 config.AppSettings.Settings.Remove("Handler");

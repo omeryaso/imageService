@@ -1,3 +1,158 @@
+commit 7d2b6498aaad6362c33be1e32eec7ef01f14dbe4
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Sun May 27 21:49:22 2018 +0300
+
+    not finish
+
+commit bbd5e0494bb337bd01deafd24f82f83147ed45c6
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun May 27 19:37:08 2018 +0300
+
+    few changes
+
+commit fd0baba21b42a02e657ea7ee34313ff898c0defc
+Merge: 232a65c c4e5168
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun May 27 16:58:23 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 232a65cf89926344cc0207d96f3b7ee6781cd4da
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun May 27 16:58:15 2018 +0300
+
+    implemented the handler shut down command and started the server in the service
+
+commit c4e5168ab20e96126eae92222742fde2689aa738
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Sun May 27 16:57:55 2018 +0300
+
+    implemented and change some commands
+
+commit f47909a00124e84951f6376844bcf2636c2ebb6d
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun May 27 15:39:07 2018 +0300
+
+    implemnted the models and finished to implement the client
+
+commit 10646662af2b4d0674d39bd5a39afb0daf711d07
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Sun May 27 15:35:04 2018 +0300
+
+    worked on commands
+
+commit a02b56dda390485c5994e1e433f431d26be19207
+Merge: 5d4c60b a491a29
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun May 27 13:03:44 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 5d4c60bb268471cc318cb4b7fdc41722165a654c
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun May 27 13:03:23 2018 +0300
+
+    Finished to implement the Client
+
+commit a491a293a4aa2d7fe7c0847c4d4b9c38457cee24
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Sun May 27 13:01:53 2018 +0300
+
+    server implemented
+
+commit 1916a5e80ad5121a545078608dd56b8b35e85da0
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Wed May 23 21:08:12 2018 +0300
+
+    hope this time nothing will collapse
+
+commit 18976a66a52d19731c5705d393e11301117c6ad3
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed May 23 12:44:21 2018 +0300
+
+    Started to implement the Client.
+    Now when the GUI app is online the tab bar will be white and otherwise will be grey
+
+commit 22a37902b0de4585f5c6624e9924cd3633af7c6f
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Fri May 18 18:09:55 2018 +0300
+
+    view problem solved
+
+commit b599aac45e086c77f1ac9e8d9647a0ed6e752955
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Fri May 18 16:48:17 2018 +0300
+
+    changes in logsView. got a little problam with the log type.
+
+commit c9118eb77fb35915e666ddc69e01139267866f92
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Thu May 17 17:51:34 2018 +0300
+
+    some progress with the logsModel
+
+commit bd3e9c94209ea06560fb175f2a603b0e2028a54d
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Thu May 17 17:48:46 2018 +0300
+
+    small changes
+
+commit 4a023b65be1dac20c6c5460754d94ee7e8097210
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Thu May 17 14:21:03 2018 +0300
+
+    implemented the settings mvvm
+
+commit d213c5c270bff65146671ebc339f7b8dcff73185
+Merge: 47ec515 aa6467f
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Thu May 17 11:09:38 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 47ec51563444ad913bbfcbadb988933aa7e2aa07
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Thu May 17 11:09:14 2018 +0300
+
+    Created the Model, ViewModel classes
+
+commit aa6467ff5a889d3aff02262e7b8d67d47a41182f
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Thu May 17 11:02:12 2018 +0300
+
+    some updates in the logsView
+
+commit d4780b08363add8791a54143ea62e03793ed4782
+Merge: 5c5816e 02725dc
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Wed May 16 20:42:06 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 5c5816eb06caed4de947bf3999cb5f53c171f49a
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Wed May 16 20:41:45 2018 +0300
+
+    log design
+
+commit 02725dc12b019840cd438441f7b69f6d114c68c7
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed May 16 20:32:36 2018 +0300
+
+    Finised the view of the settings app
+
+commit d09792a5927627137d1c0478b4ba282fd3f3cdbb
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed May 16 20:17:22 2018 +0300
+
+    Main Window GUI implementation
+
+commit 6aa4b5a9c65b4b324fed5c0ed8557f6f50a75072
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Wed May 16 16:08:12 2018 +0300
+
+    Started to implemant the gui
+
 commit b8428c7d0c9f568573e5212ef6712072f04eb935
 Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
 Date:   Sun Apr 15 20:38:02 2018 +0300

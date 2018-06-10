@@ -135,10 +135,17 @@ namespace ImageServiceGUI.Model
 
         public void HandlerClose(string handler)
         {
+            try
+            {
             Console.WriteLine(handler);
             string[] Args = { handler };
             CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.HandlerShutDown, Args, handler);
             Client.SendMessage(commandRecievedEventArgs);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
