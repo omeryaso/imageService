@@ -15,7 +15,7 @@
     <div>
         <br />
         @Html.DropDownList("typeFilter",
-                         new SelectList(Enum.GetValues(typeof(EntryType))),
+                         new SelectList(Enum.GetValues(typeof(ImageServiceWeb.Models.Type))),
                          "Log entry type",
                          new { @class = "form-control" })
         <br />
@@ -31,7 +31,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EntryType)
+            @Html.DisplayNameFor(model => model.Type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Message)
@@ -42,7 +42,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.EntryType)
+                @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Message)
