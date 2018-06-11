@@ -29,7 +29,7 @@ namespace ImageServiceWeb.Models
                 int intLocation, intLength;
 
                 intLength = imageUrl.Length;
-                intLocation = imageUrl.IndexOf("Images");
+                intLocation = imageUrl.IndexOf("target");
 
                 strDirName = imageUrl.Substring(intLocation, intLength- intLocation);
 

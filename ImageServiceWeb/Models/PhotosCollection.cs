@@ -49,7 +49,7 @@ namespace ImageServiceWeb.Models
                 {
                     return;
                 }
-                string thumbnailDir = @"C:\Users\omer\source\repos\imageService\ImageServiceWeb\target\Thumbnails";
+                string thumbnailDir = m_outputDir + "\\Thumbnails";
                 if (!Directory.Exists(thumbnailDir))
                 {
                     return;

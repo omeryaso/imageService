@@ -52,7 +52,7 @@ namespace ImageService.Modal
                 DirectoryCreator(path, out outPath, out thumbOutPath);
                 outPath = outPath + path.Substring(path.LastIndexOf("\\"));
                 thumbOutPath = thumbOutPath + path.Substring(path.LastIndexOf("\\"));
-                thumbOutPath = Path.ChangeExtension(thumbOutPath, "thumb");
+                thumbOutPath = Path.ChangeExtension(thumbOutPath, "jpg");
                 //TODO: simplify the implementation
                 outPath = ChecksifExists(outPath);
                 thumbOutPath = ChecksifExists(thumbOutPath);
