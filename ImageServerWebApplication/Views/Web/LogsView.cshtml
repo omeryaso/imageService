@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ImageServiceWeb.Models.Logs>
+
+@{
+    ViewBag.Title = "Logs";
+}
+
+<style>
+    #type {
+        width: 30%;
+    }
+</style>
+
+<h2>Logs</h2>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<input type="text" id="type" class="dropbtn" placeholder="Enter type..." />
+<button type="button" onclick="myFunction()" class="btn btn-default"><i class="fa fa-search"></i></button>
+
+<table class="table" id="myTable">
+    <tr>
+        <th width="40">
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Log)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Reverse())
+    {
+        <tr>
+            <td id="t">
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Log)
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, e;
+        input = document.getElementById("type");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        e = filter.localeCompare("");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                var type = td.innerHTML.toUpperCase().trim();
+                var n = type.localeCompare(filter);
+                if (n == 0 || e == 0) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Delete Handler";
+}
+
+<h2>Are you sure you want to delete:</h2>
+<h4 style="margin-left:40px">@ViewBag.handler ?</h4>
+
+<form id="myform" method="get" action="ConfigView">
+    <input id="okBtn" type="submit" class="btn btn-primary" style="background-color:red" value="OK" />
+    <input id="cancelBtn" class="btn btn-default" type="submit" value="cancel" />
+</form>
+
+<script>
+    $("#okBtn").click(function () {
+        document.getElementById("okBtn").disabled = true;
+        document.getElementById("cancelBtn").disabled = true;
+
+        var name = @Html.Raw(Json.Encode(ViewBag.handler));        
+        $.post("@Url.Action("RemoveHandler")", { name }, function (data) {
+            document.forms["myform"].submit();
+        });
+    });
+</script>
