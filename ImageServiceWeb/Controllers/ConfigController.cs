@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,7 +23,6 @@ namespace ImageServiceWeb.Controllers
         /// </summary>
         public ConfigController()
         {
-            config.Notify -= Notify;
             config.Notify += Notify;
         }
         /// <summary>
@@ -57,6 +57,7 @@ namespace ImageServiceWeb.Controllers
             //delete the handler
             config.DeleteHandler(m_toBeDeletedHandler);
             //go back to config page
+            Thread.Sleep(500);
             return RedirectToAction("Config");
 
         }

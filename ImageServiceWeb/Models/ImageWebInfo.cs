@@ -89,7 +89,7 @@ namespace ImageServiceWeb.Models
             List<Student> students = new List<Student>();
             try
             {
-                StreamReader file = new StreamReader(System.Web.HttpContext.Current.Server.MapPath("~/App_Data/StudentsDetails.txt"));
+                StreamReader file = new StreamReader(System.Web.HttpContext.Current.Server.MapPath("~/App_Data/students.txt"));
                 string line;
 
                 while ((line = file.ReadLine()) != null)
