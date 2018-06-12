@@ -12,21 +12,13 @@ namespace ImageServiceWeb.Models
     {
         static ImageWebModel ImageViewInfoObj = new ImageWebModel();
         /// <summary>
-        /// constructor.
+        /// ImageWebController constructor.
         /// </summary>
         public ImageWebController()
         {
-            ImageViewInfoObj.ChangeNotifyer -= Notify;
-            ImageViewInfoObj.ChangeNotifyer += Notify;
+            ImageViewInfoObj.ChangeNotifyer -= () => {ImageWeb();};
+            ImageViewInfoObj.ChangeNotifyer += () => {ImageWeb();};
 
-        }
-        /// <summary>
-        /// Notify function.
-        /// notify view about update.
-        /// </summary>
-        void Notify()
-        {
-            ImageWeb();
         }
 
         // GET: ImageView
