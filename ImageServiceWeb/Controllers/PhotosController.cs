@@ -35,9 +35,9 @@ namespace  ImageServiceWeb.Controllers
         // GET: Photos
         public ActionResult Photos()
         {
-            photos.PhotosList.Clear();
-            photos.GetPhotos();
-            return View(photos.PhotosList);
+            photos.PhotoList.Clear();
+            photos.ImportPhotos();
+            return View(photos.PhotoList);
         }
 
         /// <summary>
@@ -74,9 +74,10 @@ namespace  ImageServiceWeb.Controllers
             {
                 System.IO.File.Delete(m_currentPhoto.ImageUrl);
                 System.IO.File.Delete(m_currentPhoto.ImageFullUrl);
-                photos.PhotosList.Remove(m_currentPhoto);
-            } catch (Exception ex)
+                photos.PhotoList.Remove(m_currentPhoto);
+            } catch (Exception e)
             {
+                Console.WriteLine("PhotosController - ActionResult: " + e);
             }
 
 
@@ -90,7 +91,7 @@ namespace  ImageServiceWeb.Controllers
         /// <param name="photoRelPath"></param>
         private void UpdateCurrentPhotoFromRelPath(string photoRelPath)
         {
-            foreach (PhotosCollection.Photo photo in photos.PhotosList)
+            foreach (PhotosCollection.Photo photo in photos.PhotoList)
             {
                 if (photo.ImageRelativePath == photoRelPath)
                 {

@@ -11,47 +11,41 @@ namespace ImageServiceWeb.Models
 {
     public class PhotosCollection
     {
+        private static ConfigModel configuration;
+        private string outputDir;
         public event ChangeNotifyer NotifyEvent;
-        private static ConfigModel m_config;
-        private string m_outputDir;
-        public List<Photo> PhotosList = new List<Photo>();
+        public List<Photo> PhotoList = new List<Photo>();
 
         /// <summary>
-        /// constructor.
+        /// creates an instance of PhotoCollection.
         /// </summary>
         public PhotosCollection()
         {
-            m_config = new ConfigModel();
-            m_config.Notify += Notify;
+            configuration = new ConfigModel();
+            configuration.Notify += Notify;
         }
         /// <summary>
-        /// Notify function.
-        /// notify controller about update.
+        /// notify the controller that there was an update.
         /// </summary>
         void Notify()
         {
-            if (m_config.OutputDir != "")
+            if (configuration.OutputDir != "")
             {
-                m_outputDir = m_config.OutputDir;
-                GetPhotos();
+                outputDir = configuration.OutputDir;
+                ImportPhotos();
                 NotifyEvent?.Invoke();
             }
         }
 
         /// <summary>
-        /// GetPhotos function.
-        /// get the photos from the output dir.
+        /// import all the photos from the target directory
         /// </summary>
-        public void GetPhotos()
+        public void ImportPhotos()
         {
             try
             {
-                if (m_outputDir == "")
-                {
-                    return;
-                }
-                string thumbnailDir = m_outputDir + "\\Thumbnails";
-                if (!Directory.Exists(thumbnailDir))
+                string thumbnailDir = outputDir + "\\Thumbnails";
+                if (outputDir == "" || !Directory.Exists(thumbnailDir))
                 {
                     return;
                 }
@@ -66,26 +60,27 @@ namespace ImageServiceWeb.Models
                     }
                     foreach (DirectoryInfo monthDirInfo in yearDirInfo.GetDirectories())
                     {
-
-
-                        foreach (FileInfo fileInfo in monthDirInfo.GetFiles())
+                        foreach (FileInfo info in monthDirInfo.GetFiles())
                         {
-                            if (validExtensions.Contains(fileInfo.Extension.ToLower()))
+                            if (!validExtensions.Contains(info.Extension.ToLower()))
                             {
-                                Photo p = PhotosList.Find(x => (x.ImageUrl == fileInfo.FullName));
+                                continue;
+                            }
+                            else
+                            {
+                                Photo p = PhotoList.Find(x => (x.ImageUrl == info.FullName));
                                 if (p == null)
                                 {
-                                    PhotosList.Add(new Photo(fileInfo.FullName));
-
+                                    PhotoList.Add(new Photo(info.FullName));
                                 }
                             }
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("PhotosCollection - ImportPhotos: " + e);
             }
         }
         public class Photo
