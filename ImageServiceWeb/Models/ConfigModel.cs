@@ -27,7 +27,7 @@ namespace ImageServiceWeb.Models
             {
                 ThumbnailSize = 1;
                 string[] str = { "", "", "" };
-                initCRE(str);
+                InitCRE(str);
                 Handlers = new ObservableCollection<string>();
                 Enabled = false;
 
@@ -100,11 +100,11 @@ namespace ImageServiceWeb.Models
             try
             {
                 string[] str = { msg.Args[0], msg.Args[1], msg.Args[2]};
-                initCRE(str);
+                InitCRE(str);
                 int.TryParse(msg.Args[3], out int num);
                 ThumbnailSize = num;
                 string[] handlers = msg.Args[4].Split(';');
-                handlerAdder(handlers);
+                HandlerAdder(handlers);
             }
             catch (Exception e)
             {
@@ -112,7 +112,11 @@ namespace ImageServiceWeb.Models
             }
         }
 
-        private void handlerAdder(string[] handlers)
+        /// <summary>
+        /// adds handlers by a given list
+        /// </summary>
+        /// <param name="handlers"></param>
+        private void HandlerAdder(string[] handlers)
         {
             foreach (string handler in handlers)
             {
@@ -123,7 +127,13 @@ namespace ImageServiceWeb.Models
             }
 
         }
-        private void initCRE(String[] str)
+
+        /// <summary>
+        /// initialize OutputDir SrcName and LogName 
+        /// with the given string
+        /// </summary>
+        /// <param name="str"></param>
+        private void InitCRE(String[] str)
         {
             OutputDir = str[0];
             SrcName = str[1];
