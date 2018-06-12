@@ -1,21 +1,20 @@
-﻿using ImageService.Infrastructure.Enums;
-using ImageService.Modal;
-using ImageServiceWeb.Communication;
-using ImageServiceWeb.Models;
+﻿using ImageService.Modal;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using ImageServiceWeb.Models;
 using System.Linq;
-using System.Threading;
-using System.Web;
+using ImageServiceWeb.Communication;
+using System.Collections.Generic;
+using ImageService.Infrastructure.Enums;
 using System.Web.Mvc;
+using System.Collections.ObjectModel;
+using System.Web;
 
 namespace ImageServiceWeb.Controllers
 {
     public class ConfigController : Controller
     {
-        static Config config = new Config();
-        private static string m_toBeDeletedHandler;
+        static ConfigModel config = new ConfigModel();
+        private static string m_handler;
 
 
         /// <summary>
@@ -34,13 +33,6 @@ namespace ImageServiceWeb.Controllers
             Config();
         }
 
-        // GET: Config/DeleteHandler/
-        public ActionResult DeleteHandler(string toBeDeletedHandler)
-        {
-            m_toBeDeletedHandler = toBeDeletedHandler;
-            return RedirectToAction("Confirm");
-
-        }
         // GET: Confirm
         public ActionResult Confirm()
         {
@@ -51,20 +43,29 @@ namespace ImageServiceWeb.Controllers
         {
             return View(config);
         }
-        // GET: Config/DeleteOK/
-        public ActionResult DeleteOK()
-        {
-            //delete the handler
-            config.DeleteHandler(m_toBeDeletedHandler);
-            //go back to config page
-            Thread.Sleep(500);
-            return RedirectToAction("Config");
 
-        }
-        // GET: Config/DeleteCancel/
+        // GET: ConfigController/DeleteCancel/
         public ActionResult DeleteCancel()
         {
             //go back to config page
+            return RedirectToAction("Config");
+
+        }
+
+        // GET: ConfigController/DeleteHandler
+        public ActionResult DeleteHandler(string handler)
+        {
+            m_handler = handler;
+            return RedirectToAction("Confirm");
+
+        }
+
+        // GET: ConfigController/DeleteOK/
+        public ActionResult DeleteOK()
+        {
+            //delete the handler
+            config.DeleteHandler(m_handler);
+            System.Threading.Thread.Sleep(1000);
             return RedirectToAction("Config");
 
         }
