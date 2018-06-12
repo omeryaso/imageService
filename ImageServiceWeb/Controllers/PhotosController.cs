@@ -11,7 +11,7 @@ namespace  ImageServiceWeb.Controllers
     public class PhotosController : Controller
     {
         public static PhotosCollection photos = new PhotosCollection();
-        private static Photo m_currentPhoto;
+        private static PhotosCollection.Photo m_currentPhoto;
 
         /// <summary>
         /// constructor.
@@ -90,7 +90,7 @@ namespace  ImageServiceWeb.Controllers
         /// <param name="photoRelPath"></param>
         private void UpdateCurrentPhotoFromRelPath(string photoRelPath)
         {
-            foreach (Photo photo in photos.PhotosList)
+            foreach (PhotosCollection.Photo photo in photos.PhotosList)
             {
                 if (photo.ImageRelativePath == photoRelPath)
                 {
