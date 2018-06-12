@@ -11,20 +11,13 @@
 <div>
     @using (Html.BeginForm("Logs", "Logs", FormMethod.Post))
     {
-
     <div>
-        <br />
-        @Html.DropDownList("typeFilter",
-                         new SelectList(Enum.GetValues(typeof(ImageServiceWeb.Models.Type))),
-                         "Log entry type",
-                         new { @class = "form-control" })
-        <br />
-        <input type="submit" id="submitId" value="Filter" class="btn-info" />
-
+        @Html.DropDownList("typeFilter",new SelectList(Enum.GetValues(typeof(ImageServiceWeb.Models.Type))),
+        "Logs type",new { @class = "form-control" })
     </div>
-
-    }
-
+    <br />
+        <input type="submit" id="submitId" value="Filter" class="btn-info" />
+        }
 </div>
 
 <br />
@@ -38,14 +31,14 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var log in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => log.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Message)
+                @Html.DisplayFor(modelItem => log.Message)
             </td>
         </tr>
     }
