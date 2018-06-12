@@ -13,8 +13,8 @@ namespace ImageServiceWeb.Models
     public class ConfigModel
     {
         private static Communication.IWebClient WebClient { get; set; }
-        public delegate void NotifyAboutChange();
-        public event NotifyAboutChange Notify;
+        public delegate void ChangeNotifyer();
+        public event ChangeNotifyer Notify;
 
 
         /// <summary>

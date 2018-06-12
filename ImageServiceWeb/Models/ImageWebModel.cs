@@ -8,31 +8,31 @@ using static ImageServiceWeb.Models.ConfigModel;
 
 namespace ImageServiceWeb.Models
 {
-    public class ImageWebInfo
+    public class ImageWebModel
     {
         private static Communication.IWebClient WebClient { get; set; }
-        public event NotifyAboutChange NotifyEvent;
-        private static ConfigModel m_config;
+        public event ChangeNotifyer ChangeNotifyer;
+        private static ConfigModel ConfigModel;
         private static string m_outputDir;
+        private const string stud = "~/App_Data/students.txt";
 
         /// <summary>
-        /// ImageWebInfo constructor.
-        /// initialize new ImageWebInfo obj.
+        /// ImageWebModel constructor.
         /// </summary>
-        public ImageWebInfo()
+        public ImageWebModel()
         {
             try
             {
+                NumofPics = 0;
                 WebClient = Communication.WebClient.Instance;
                 IsConnected = WebClient.IsConnected;
-                NumofPics = 0;
-                m_config = new ConfigModel();
-                m_config.Notify += Notify;
-                Students = GetStudents();
+                ConfigModel = new ConfigModel();
+                ConfigModel.Notify += Notify;
+                GetStudentsList();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("ImageWebModel: " + e);
             }
         }
 
@@ -42,11 +42,11 @@ namespace ImageServiceWeb.Models
         /// </summary>
         void Notify()
         {
-            if (m_config.OutputDir != "")
+            if (ConfigModel.OutputDir != "")
             {
-                m_outputDir = m_config.OutputDir;
+                m_outputDir = ConfigModel.OutputDir;
                 NumofPics = GetNumOfPics();
-                NotifyEvent?.Invoke();
+                ChangeNotifyer?.Invoke();
             }
         }
 
@@ -73,37 +73,37 @@ namespace ImageServiceWeb.Models
                 sum += di.GetFiles("*.GIF", SearchOption.AllDirectories).Length;
                 return sum / 2;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                Console.WriteLine("ImageWebModel: " + e);
                 return 0;
             }
         }
 
         /// <summary>
-        /// GetStudents function.
-        /// gets student details.
+        /// GetStudentsList.
+        /// reads from a file the names of the students and their details
         /// </summary>
-        /// <returns></returns>
-        public static List<Student> GetStudents()
+        public void GetStudentsList()
         {
-            List<Student> students = new List<Student>();
+            List<Student> studList = new List<Student>();
             try
             {
-                StreamReader file = new StreamReader(System.Web.HttpContext.Current.Server.MapPath("~/App_Data/students.txt"));
+                StreamReader file = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(stud));
                 string line;
 
                 while ((line = file.ReadLine()) != null)
                 {
-                    string[] param = line.Split(',');
-                    students.Add(new Student() { FirstName = param[0], LastName = param[1], ID = param[2] });
+                    string[] words = line.Split(',');
+                    studList.Add(new Student() { LastName = words[0], FirstName = words[1], ID = words[2], Group = words[3] });
                 }
                 file.Close();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("ImageWebModel -SetStudents: " + e);
             }
-            return students;
+            Students = studList;
         }
 
         //members
@@ -123,16 +123,20 @@ namespace ImageServiceWeb.Models
         public class Student
         {
             [Required]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
             [Display(Name = "ID")]
             public string ID { get; set; }
+
+            [Required]
+            [Display(Name = "Group")]
+            public string Group { get; set; }
         }
     }
 }
