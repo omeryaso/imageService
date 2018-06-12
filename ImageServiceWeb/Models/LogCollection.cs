@@ -16,7 +16,7 @@ namespace ImageServiceWeb.Models
     {
         public delegate void NotifyAboutChange();
         public event NotifyAboutChange Notify;
-        private static Communication.IImageServiceClient GuiClient;
+        private static Communication.IWebClient WebClient;
 
         /// <summary>
         /// LogCollection constructor.
@@ -26,9 +26,9 @@ namespace ImageServiceWeb.Models
         {
             try
             {
-                GuiClient = ImageServiceClient.Instance;
-                GuiClient.UpdateResponse += UpdateResponse;
-                GuiClient.RecieveCommand();
+                WebClient = Communication.WebClient.Instance;
+                WebClient.UpdateData += UpdateResponse;
+                WebClient.RecieveMessage();
                 this.InitializeLogsParams();
             }
             catch (Exception ex)
@@ -52,9 +52,9 @@ namespace ImageServiceWeb.Models
             {
                 LogEntries = new List<Log>();
                 CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, null, "");
-                GuiClient.SendCommand(commandRecievedEventArgs);
+                WebClient.SendMessage(commandRecievedEventArgs);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
             }

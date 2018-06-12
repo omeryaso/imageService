@@ -10,7 +10,7 @@ namespace ImageServiceWeb.Models
 {
     public class ImageWebInfo
     {
-        private static Communication.IImageServiceClient GuiClient { get; set; }
+        private static Communication.IWebClient WebClient { get; set; }
         public event NotifyAboutChange NotifyEvent;
         private static Config m_config;
         private static string m_outputDir;
@@ -23,8 +23,8 @@ namespace ImageServiceWeb.Models
         {
             try
             {
-                GuiClient = Communication.ImageServiceClient.Instance;
-                IsConnected = GuiClient.IsConnected;
+                WebClient = Communication.WebClient.Instance;
+                IsConnected = WebClient.IsConnected;
                 NumofPics = 0;
                 m_config = new Config();
                 m_config.Notify += Notify;

@@ -14,7 +14,7 @@ namespace ImageServiceWeb.Models
     {
         public delegate void NotifyAboutChange();
         public event NotifyAboutChange Notify;
-        private static Communication.IImageServiceClient GuiClient { get; set; }
+        private static Communication.IWebClient WebClient { get; set; }
 
 
         /// <summary>
@@ -25,9 +25,9 @@ namespace ImageServiceWeb.Models
         {
             try
             {
-                GuiClient = Communication.ImageServiceClient.Instance;
-                GuiClient.RecieveCommand();
-                GuiClient.UpdateResponse += UpdateResponse;
+                WebClient = Communication.WebClient.Instance;
+                WebClient.RecieveMessage();
+                WebClient.UpdateData += UpdateResponse;
                 SourceName = "";
                 LogName = "";
                 OutputDirectory = "";
@@ -36,7 +36,7 @@ namespace ImageServiceWeb.Models
                 Enabled = false;
                 string[] arr = new string[5];
                 CommandRecievedEventArgs request = new CommandRecievedEventArgs((int)CommandEnum.GetConfigCommand, arr, "");
-                GuiClient.SendCommand(request);
+                WebClient.SendMessage(request);
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace ImageServiceWeb.Models
             {
                 string[] arr = { toBeDeleted };
                 CommandRecievedEventArgs eventArgs = new CommandRecievedEventArgs((int)CommandEnum.HandlerShutDown, arr, "");
-                GuiClient.SendCommand(eventArgs);
+                WebClient.SendMessage(eventArgs);
             }
             catch (Exception ex)
             {
