@@ -165,7 +165,6 @@
     <Content Include="scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Views\Logs\Logs.cshtml" />
     <Content Include="Views\ImageWeb\ImageWeb.cshtml" />
-    <Content Include="Views\Photos\Photos_old.cshtml" />
     <Content Include="Views\Photos\Photos.cshtml" />
     <Content Include="Views\Photos\PhotosViewer.cshtml" />
     <Content Include="Views\Photos\DeletePhoto.cshtml" />
