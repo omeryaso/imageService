@@ -22,15 +22,7 @@ namespace ImageServiceWeb.Controllers
         /// </summary>
         public ConfigController()
         {
-            config.Notify += Notify;
-        }
-        /// <summary>
-        /// Notify function.
-        /// notify view about change.
-        /// </summary>
-        public void Notify()
-        {
-            Config();
+            config.Notify += () => {Config();};
         }
 
         // GET: Confirm
@@ -47,9 +39,7 @@ namespace ImageServiceWeb.Controllers
         // GET: ConfigController/DeleteCancel/
         public ActionResult DeleteCancel()
         {
-            //go back to config page
             return RedirectToAction("Config");
-
         }
 
         // GET: ConfigController/DeleteHandler
@@ -57,7 +47,6 @@ namespace ImageServiceWeb.Controllers
         {
             m_handler = handler;
             return RedirectToAction("Confirm");
-
         }
 
         // GET: ConfigController/DeleteOK/

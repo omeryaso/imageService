@@ -18,18 +18,8 @@ namespace  ImageServiceWeb.Controllers
         /// </summary>
         public PhotosController()
         {
-            photos.NotifyEvent -= Notify;
-            photos.NotifyEvent += Notify;
-
-        }
-
-        /// <summary>
-        /// Notify function.
-        /// notify view about update.
-        /// </summary>
-        void Notify()
-        {
-            Photos();
+            photos.NotifyEvent -= () => { Photos(); };
+            photos.NotifyEvent += () => { Photos(); };
         }
 
         // GET: Photos
@@ -41,13 +31,13 @@ namespace  ImageServiceWeb.Controllers
         }
 
         /// <summary>
-        /// \ function.
+        /// PhotosViewer.
         /// </summary>
-        /// <param name="photoRelPath"> the pic to be presented</param>
-        /// <returns></returns>
-        public ActionResult PhotosViewer(string photoRelPath)
+        /// <param name="RelPath"> the photo in the web for view</param>
+        /// <returns>PhotosViewer</returns>
+        public ActionResult PhotosViewer(string RelPath)
         {
-            UpdateCurrentPhotoFromRelPath(photoRelPath);
+            UpdatePhotoPath(RelPath);
             return View(m_currentPhoto);
         }
 
@@ -58,16 +48,15 @@ namespace  ImageServiceWeb.Controllers
         /// <returns></returns>
         public ActionResult DeletePhoto(string photoRelPath)
         {
-            UpdateCurrentPhotoFromRelPath(photoRelPath);
+            UpdatePhotoPath(photoRelPath);
             return View(m_currentPhoto);
         }
 
         /// <summary>
-        /// DeleteYes function.
-        /// confirmation of the delete.
+        /// DeleteYes.
         /// </summary>
         /// <param name="photoRelPath"></param>
-        /// <returns></returns>
+        /// <returns>DeleteYes</returns>
         public ActionResult DeleteYes(string photoRelPath)
         {
             try
@@ -79,25 +68,23 @@ namespace  ImageServiceWeb.Controllers
             {
                 Console.WriteLine("PhotosController - ActionResult: " + e);
             }
-
-
             return RedirectToAction("Photos");
         }
 
         /// <summary>
-        /// UpdateCurrentPhotoFromRelPath function.
-        /// updates the current photo.
+        /// UpdatePhotoPath.
         /// </summary>
         /// <param name="photoRelPath"></param>
-        private void UpdateCurrentPhotoFromRelPath(string photoRelPath)
+        private void UpdatePhotoPath(string photoRelPath)
         {
             foreach (PhotosCollection.Photo photo in photos.PhotoList)
             {
-                if (photo.ImageRelativePath == photoRelPath)
+                if (photo.ImageRelativePath != photoRelPath)
                 {
+                    continue;
+                }
                     m_currentPhoto = photo;
                     break;
-                }
             }
         }
     }

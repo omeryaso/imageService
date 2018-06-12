@@ -11,23 +11,13 @@ namespace ImageServiceWeb.Controllers
     {
         public static LogCollection log = new LogCollection();
         /// <summary>
-        /// constructor.
+        /// LogsController constructor.
         /// </summary>
         public LogsController()
         {
-            log.Notify -= Notify;
-            log.Notify += Notify;
+            log.Notify -= () => { Logs(); };
+            log.Notify += () => { Logs(); };
         }
-
-        /// <summary>
-        /// Notify function.
-        /// notify view about update.
-        /// </summary>
-        public void Notify()
-        {
-            Logs();
-        }
-
 
         // GET: Logs
         public ActionResult Logs()
@@ -36,29 +26,27 @@ namespace ImageServiceWeb.Controllers
         }
 
         /// <summary>
-        /// Logs function.
-        /// implementation of sort.
+        /// 
         /// </summary>
-        /// <param name="form"></param>
-        /// <returns></returns>
+        /// <param name="collection"></param>
+        /// <returns>ActionResult</returns>
         [HttpPost]
-        public ActionResult Logs(FormCollection form)
+        public ActionResult Logs(FormCollection collection)
         { 
-            string type = form["typeFilter"].ToString();
-            if (type == "")
+            string type = collection["typeFilter"].ToString();
+            if (type != "")
             {
-                return View(log.LogEntries);
-            }
-            List<LogCollection.Log> filteredLogsList = new List<LogCollection.Log>();
-            foreach (LogCollection.Log log in log.LogEntries)
-            {
-                if (log.Type == type)
+                List<LogCollection.Log> filteredList = new List<LogCollection.Log>();
+                foreach (LogCollection.Log log in log.LogEntries)
                 {
-                    filteredLogsList.Add(log);
+                    if (log.Type == type)
+                    {
+                        filteredList.Add(log);
+                    }
                 }
+                return View(filteredList);
             }
-            return View(filteredLogsList);
-            
+            return View(log.LogEntries);
         }
     }
 }
