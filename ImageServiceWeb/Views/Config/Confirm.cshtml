@@ -5,13 +5,13 @@
 
 }
 
-<h2>Do you really wan to delete this handler?</h2>
+<h2>Do you really want to delete this handler?</h2>
 
 <button type="button" id="bOK" style="margin:10px">OK</button>
 <button type="button" id="bCancel" style="margin:10px">Cancel</button>
 <script>
     $("#bOK").click(function () {
-        $.post("@Url.Action("ConfirmDelete")", function () {
+        $.post("@Url.Action("DeleteConfirm")", function () {
             window.location.href = "Config";
         });
     });

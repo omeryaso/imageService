@@ -61,7 +61,7 @@ namespace ImageServiceWeb.Controllers
         }
 
         // GET: ConfigController/DeleteOK/
-        public ActionResult DeleteOK()
+        public ActionResult DeleteConfirm()
         {
             //delete the handler
             config.DeleteHandler(m_handler);
