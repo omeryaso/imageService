@@ -31,13 +31,13 @@ namespace  ImageServiceWeb.Controllers
         }
 
         /// <summary>
-        /// PhotosViewer.
+        /// \ function.
         /// </summary>
-        /// <param name="RelPath"> the photo in the web for view</param>
+        /// <param name="photoRelPath"> the pic to be presented</param>
         /// <returns>PhotosViewer</returns>
-        public ActionResult PhotosViewer(string RelPath)
+        public ActionResult PhotosViewer(string photoRelPath)
         {
-            UpdatePhotoPath(RelPath);
+            UpdateCurrentPhotoFromRelPath(photoRelPath);
             return View(m_currentPhoto);
         }
 
@@ -48,7 +48,7 @@ namespace  ImageServiceWeb.Controllers
         /// <returns></returns>
         public ActionResult DeletePhoto(string photoRelPath)
         {
-            UpdatePhotoPath(photoRelPath);
+            UpdateCurrentPhotoFromRelPath(photoRelPath);
             return View(m_currentPhoto);
         }
 
@@ -68,23 +68,24 @@ namespace  ImageServiceWeb.Controllers
             {
                 Console.WriteLine("PhotosController - ActionResult: " + e);
             }
+
+
             return RedirectToAction("Photos");
         }
 
         /// <summary>
-        /// UpdatePhotoPath.
+        /// UpdateCurrentPhotoFromRelPath.
         /// </summary>
         /// <param name="photoRelPath"></param>
-        private void UpdatePhotoPath(string photoRelPath)
+        private void UpdateCurrentPhotoFromRelPath(string photoRelPath)
         {
             foreach (PhotosCollection.Photo photo in photos.PhotoList)
             {
-                if (photo.ImageRelativePath != photoRelPath)
+                if (photo.ImageRelativePath == photoRelPath)
                 {
-                    continue;
-                }
                     m_currentPhoto = photo;
                     break;
+                }
             }
         }
     }
