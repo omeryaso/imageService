@@ -10,7 +10,7 @@ namespace ImageServiceWeb.Models
 {
     public class PhotosCollection
     {
-        public event NotifyAboutChange NotifyEvent;
+        public event ChangeNotifyer NotifyEvent;
         private static ConfigModel m_config;
         private string m_outputDir;
         public List<Photo> PhotosList = new List<Photo>();
