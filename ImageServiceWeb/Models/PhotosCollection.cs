@@ -4,14 +4,14 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
-using static ImageServiceWeb.Models.Config;
+using static ImageServiceWeb.Models.ConfigModel;
 
 namespace ImageServiceWeb.Models
 {
     public class PhotosCollection
     {
         public event NotifyAboutChange NotifyEvent;
-        private static Config m_config;
+        private static ConfigModel m_config;
         private string m_outputDir;
         public List<Photo> PhotosList = new List<Photo>();
 
@@ -20,7 +20,7 @@ namespace ImageServiceWeb.Models
         /// </summary>
         public PhotosCollection()
         {
-            m_config = new Config();
+            m_config = new ConfigModel();
             m_config.Notify += Notify;
         }
         /// <summary>

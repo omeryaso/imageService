@@ -10,92 +10,77 @@ using System.Web;
 
 namespace ImageServiceWeb.Models
 {
-    public class Config
+    public class ConfigModel
     {
+        private static Communication.IWebClient WebClient { get; set; }
         public delegate void NotifyAboutChange();
         public event NotifyAboutChange Notify;
-        private static Communication.IWebClient WebClient { get; set; }
 
 
         /// <summary>
         /// constructor.
         /// initialize new config params.
         /// </summary>
-        public Config()
+        public ConfigModel()
         {
             try
             {
                 WebClient = Communication.WebClient.Instance;
                 WebClient.RecieveMessage();
-                WebClient.UpdateData += UpdateResponse;
-                SourceName = "";
-                LogName = "";
-                OutputDirectory = "";
+                WebClient.UpdateData += (CommandRecievedEventArgs res) =>
+                {
+                    try
+                    {
+                        if (res == null)
+                            return;
+
+                        if (res.CommandID == (int)CommandEnum.GetConfigCommand)
+                            UpdateConfigurations(res);
+                        else if (res.CommandID == (int)CommandEnum.HandlerShutDown)
+                            HandlerClose(res);
+                        Notify?.Invoke();
+                        //update controller
+                        Notify?.Invoke();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("ConfigModel: " + e);
+                    }
+                };
+
+                OutputDirectory = LogName = SourceName = "";
                 ThumbnailSize = 1;
                 Handlers = new ObservableCollection<string>();
                 Enabled = false;
-                string[] arr = new string[5];
-                CommandRecievedEventArgs request = new CommandRecievedEventArgs((int)CommandEnum.GetConfigCommand, arr, "");
-                WebClient.SendMessage(request);
+                WebClient.SendMessage(new CommandRecievedEventArgs((int)CommandEnum.GetConfigCommand, new string[5], ""));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("ConfigModel: " + e);
             }
         }
         /// <summary>
-        /// DeleteHandler function.
-        /// deletes handler.
+        /// this method will delete the given handler.
         /// </summary>
-        /// <param name="toBeDeleted"></param>
-        public void DeleteHandler(string toBeDeleted)
+        /// <param name="handler"></param>
+        public void DeleteHandler(string handler)
         {
+            string[] arr = { handler };
             try
             {
-                string[] arr = { toBeDeleted };
-                CommandRecievedEventArgs eventArgs = new CommandRecievedEventArgs((int)CommandEnum.HandlerShutDown, arr, "");
-                WebClient.SendMessage(eventArgs);
+                WebClient.SendMessage(new CommandRecievedEventArgs((int)CommandEnum.HandlerShutDown, arr, ""));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
-            }
-        }
-        /// <summary>
-        /// UpdateResponse function.
-        /// updates the model when message recieved from srv.
-        /// </summary>
-        /// <param name="responseObj">the info came from srv</param>
-        private void UpdateResponse(CommandRecievedEventArgs responseObj)
-        {
-            try
-            {
-                if (responseObj != null)
-                {
-                    switch (responseObj.CommandID)
-                    {
-                        case (int)CommandEnum.GetConfigCommand:
-                            UpdateConfigurations(responseObj);
-                            break;
-                        case (int)CommandEnum.HandlerShutDown:
-                            CloseHandler(responseObj);
-                            break;
-                    }
-                    //update controller
-                    Notify?.Invoke();
-                }
-            }
-            catch (Exception ex)
-            {
-
+                Console.WriteLine("ConfigModel - DeleteHandler: " + e);
             }
         }
 
         /// <summary>
-        /// CloseHandler function.
+        /// this method will close the given handler.
         /// </summary>
         /// <param name="responseObj">the info came from srv</param>
-        private void CloseHandler(CommandRecievedEventArgs responseObj)
+        private void HandlerClose(CommandRecievedEventArgs responseObj)
         {
             if (Handlers != null && Handlers.Count > 0 && responseObj != null && responseObj.Args != null
                                  && Handlers.Contains(responseObj.Args[0]))

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Web;
-using static ImageServiceWeb.Models.Config;
+using static ImageServiceWeb.Models.ConfigModel;
 
 namespace ImageServiceWeb.Models
 {
@@ -12,7 +12,7 @@ namespace ImageServiceWeb.Models
     {
         private static Communication.IWebClient WebClient { get; set; }
         public event NotifyAboutChange NotifyEvent;
-        private static Config m_config;
+        private static ConfigModel m_config;
         private static string m_outputDir;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace ImageServiceWeb.Models
                 WebClient = Communication.WebClient.Instance;
                 IsConnected = WebClient.IsConnected;
                 NumofPics = 0;
-                m_config = new Config();
+                m_config = new ConfigModel();
                 m_config.Notify += Notify;
                 Students = GetStudents();
             }
