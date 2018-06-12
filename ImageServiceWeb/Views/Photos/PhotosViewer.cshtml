@@ -5,10 +5,10 @@
 }
 
 <h2>PhotosViewer</h2>
-<br />
-<p>Name: @Model.Name</p>
-<p>Date: @Model.Month/@Model.Year   <a href="@Url.Action("DeletePhoto", new { photoRelPath = Model.ImageRelativePath})" id="btnDelete" class="btn btn-danger btn-xs" role="button">Delete</a></p>
+<h3>@Model.Name</h3>
+<p>@Model.Month @Model.Year </p>
 
-<img src= "@Url.Content(Model.ImageRelativePath)" >
+<p><img src="@Url.Content(Model.ImageRelativePath)"></p>
+        <a href="@Url.Action("DeletePhoto", new { photoRelPath = Model.ImageRelativePath})" id="bDelete" class="btn btn-danger btn-xs" role="button">Delete</a>
 
 

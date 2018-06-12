@@ -41,7 +41,7 @@ namespace  ImageServiceWeb.Controllers
         }
 
         /// <summary>
-        /// PhotosViewer function.
+        /// \ function.
         /// </summary>
         /// <param name="photoRelPath"> the pic to be presented</param>
         /// <returns></returns>

@@ -1,17 +1,16 @@
 ﻿@model ImageServiceWeb.Models.Photo
 
 @{
-    ViewBag.Title = "DeletePhoto";
+    ViewBag.Title = "Delete This Photo?";
 }
 
-<h2>Delete Photo</h2>
-<br />
-<h3>Are you sure you want to delete this photo?</h3>
-<h4>Name: @Model.Name</h4>
-<h4>Date: @Model.Month/@Model.Year</h4>
+<h1>Delete This Photo</h1>
+<h2>Do you really want to delete this photo?</h2>
+<h4>@Model.Name, @Model.Month @Model.Year</h4>
 
 <img src="@Url.Content(Model.ImageRelativePathThumbnail)">
-<br />
-<br />
+<br /><br /><br />
 
-<p><a href="@Url.Action("Photos")" class="btn btn-info btn-xs" role="button">No</a> <a href="@Url.Action("DeleteYes", new { photoRelPath = Model.ImageRelativePath})" class="btn btn-danger btn-xs" role="button">Yes</a></p>
+<p><a href="@Url.Action("Photos")" class="btn btn-info btn-xs" role="button">No</a> 
+    <a href="@Url.Action("DeleteYes", new { photoRelPath = Model.ImageRelativePath})"
+       class="btn btn-danger btn-xs" role="button">Yes</a></p>
