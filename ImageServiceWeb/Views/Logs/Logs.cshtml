@@ -1,6 +1,6 @@
 ﻿@using ImageServiceWeb.Models;
 
-@model IEnumerable<ImageServiceWeb.Models.Log>
+@model IEnumerable<ImageServiceWeb.Models.LogCollection.Log>
 
 @{
     ViewBag.Title = "Logs";
@@ -12,7 +12,7 @@
     @using (Html.BeginForm("Logs", "Logs", FormMethod.Post))
     {
     <div>
-        @Html.DropDownList("typeFilter",new SelectList(Enum.GetValues(typeof(ImageServiceWeb.Models.Type))),
+        @Html.DropDownList("typeFilter",new SelectList(Enum.GetValues(typeof(ImageServiceWeb.Models.LogCollection.Type))),
         "Logs type",new { @class = "form-control" })
     </div>
     <br />

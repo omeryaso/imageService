@@ -49,8 +49,8 @@ namespace ImageServiceWeb.Controllers
             {
                 return View(log.LogEntries);
             }
-            List<Log> filteredLogsList = new List<Log>();
-            foreach (Log log in log.LogEntries)
+            List<LogCollection.Log> filteredLogsList = new List<LogCollection.Log>();
+            foreach (LogCollection.Log log in log.LogEntries)
             {
                 if (log.Type == type)
                 {

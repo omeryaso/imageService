@@ -20,109 +20,134 @@ namespace ImageServiceWeb.Models
 
         /// <summary>
         /// LogCollection constructor.
-        /// initialize new Log list.
+        /// creates an instance of LogCollection
         /// </summary>
         public LogCollection()
         {
             try
             {
                 WebClient = Communication.WebClient.Instance;
-                WebClient.UpdateData += UpdateResponse;
+                WebClient.UpdateData += UpdateData;
                 WebClient.RecieveMessage();
-                this.InitializeLogsParams();
+                StartLogs();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("LogCollection - LogCollection: " + e);
             }
         }
 
-        //members
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Log Enteries")]
         public List<Log> LogEntries { get; set; }
 
+
+
         /// <summary>
-        /// retreive event log entries list from the image service.
+        /// update the corresponing log entry to the web app
         /// </summary>
-        private void InitializeLogsParams()
+        /// <param name="msg"></param>
+        private void UpdateData(CommandRecievedEventArgs msg)
         {
             try
             {
-                LogEntries = new List<Log>();
-                CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, null, "");
-                WebClient.SendMessage(commandRecievedEventArgs);
-            }
-            catch (Exception )
-            {
-
-            }
-        }
-
-        /// <summary>
-        /// get CommandRecievedEventArgs object which was sent from the image service.
-        /// reacts only if the commandID is relevant to the log model.
-        /// </summary>
-        /// <param name="responseObj"></param>
-        private void UpdateResponse(CommandRecievedEventArgs responseObj)
-        {
-            try
-            {
-                if (responseObj != null)
+                if (msg != null)
                 {
-                    switch (responseObj.CommandID)
-                    {
-                        case (int)CommandEnum.LogCommand:
-                            IntializeLogEntriesList(responseObj);
-                            break;
-                        case (int)CommandEnum.NewLog:
-                            AddLogEntry(responseObj);
-                            break;
-                        default:
-                            break;
-                    }
-                    Notify?.Invoke();
+                    if (msg.CommandID == (int)CommandEnum.LogCommand)
+                        InsertLogsEntries(msg);
+                    else if (msg.CommandID == (int)CommandEnum.NewLog)
+                        AddLogData(msg);
                 }
+                    Notify?.Invoke();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("LogCollection - UpdateData: " + e);
             }
         }
 
         /// <summary>
-        /// Initialize log event entries list.
+        /// set up all the log files
         /// </summary>
-        /// <param name="responseObj">expected json string of ObservableCollection<LogEntry> in responseObj.Args[0]</param>
-        private void IntializeLogEntriesList(CommandRecievedEventArgs responseObj)
+        /// <param name="msg">all the log entries in Json
+        private void InsertLogsEntries(CommandRecievedEventArgs msg)
         {
             try
             {
-                foreach (Log log in JsonConvert.DeserializeObject<ObservableCollection<Log>>(responseObj.Args[0]))
+                foreach (Log log in JsonConvert.DeserializeObject<ObservableCollection<Log>>(msg.Args[0]))
                 {
                     LogEntries.Add( new Log { Type = log.Type, Message = log.Message } );
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                Console.WriteLine("LogCollection - InsertLogsEntries: " + e);
+
+            }
+        }
+
+        /// <summary>
+        /// gets the log enteries from the service
+        /// </summary>
+        private void StartLogs()
+        {
+            try
+            {
+                LogEntries = new List<Log>();
+                CommandRecievedEventArgs args = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, null, "");
+                WebClient.SendMessage(args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("LogCollection - StartLogs: " + e);
             }
         }
 
         /// <summary>
         /// adds new log entry to the event log entries list
         /// </summary>
-        /// <param name="responseObj">expected responseObj.Args[0] = EntryType,  responseObj.Args[1] = Message </param>
-        private void AddLogEntry(CommandRecievedEventArgs responseObj)
+        /// <param name="msg">expected responseObj.Args[0] = EntryType,  responseObj.Args[1] = Message </param>
+        private void AddLogData(CommandRecievedEventArgs msg)
         {
             try
             {
-                Log newLogEntry = new Log { Type = responseObj.Args[0], Message = responseObj.Args[1] };
-                this.LogEntries.Insert(0, new Log { Type = newLogEntry.Type, Message = newLogEntry.Message });
+                Log newLogEntry = new Log { Type = msg.Args[0], Message = msg.Args[1] };
+                LogEntries.Insert(0, new Log { Type = newLogEntry.Type, Message = newLogEntry.Message });
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                Console.WriteLine("LogCollection - AddLogData: " + e);
             }
+        }
+
+        /// <summary>
+        /// Log class - this is the log object
+        /// </summary>
+        public class Log
+        {
+            //members
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Type")]
+            public string Type { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Message")]
+            public string Message { get; set; }
+
+
+        }
+
+        /// <summary>
+        /// enum to the logs types
+        /// </summary>
+        public enum Type
+        {
+            INFO,
+            FAIL,
+            WARNING
         }
     }
 }
