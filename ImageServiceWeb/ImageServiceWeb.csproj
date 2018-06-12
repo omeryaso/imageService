@@ -148,7 +148,6 @@
     <Compile Include="Controllers\ImageWebController.cs" />
     <Compile Include="Models\ImageWebModel.cs" />
     <Compile Include="Models\LogCollection.cs" />
-    <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotosCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
