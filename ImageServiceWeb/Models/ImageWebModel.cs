@@ -13,9 +13,9 @@ namespace ImageServiceWeb.Models
         private static Communication.IWebClient WebClient { get; set; }
         public event ChangeNotifyer ChangeNotifyer;
         private static ConfigModel ConfigModel;
-        private static string m_outputDir;
+        private static string outputDir;
         private const string stud = "~/App_Data/students.txt";
-
+ 
         /// <summary>
         /// ImageWebModel constructor.
         /// </summary>
@@ -23,12 +23,12 @@ namespace ImageServiceWeb.Models
         {
             try
             {
-                NumofPics = 0;
+                PicsNum = 0;
+                GetStudentsList();
                 WebClient = Communication.WebClient.Instance;
                 IsConnected = WebClient.IsConnected;
                 ConfigModel = new ConfigModel();
                 ConfigModel.Notify += Notify;
-                GetStudentsList();
             }
             catch (Exception e)
             {
@@ -37,47 +37,55 @@ namespace ImageServiceWeb.Models
         }
 
         /// <summary>
-        /// Notify function.
-        /// notifies controller about change.
+        /// when a change happens it will called to notify.
         /// </summary>
         void Notify()
         {
             if (ConfigModel.OutputDir != "")
             {
-                m_outputDir = ConfigModel.OutputDir;
-                NumofPics = GetNumOfPics();
+                PicsNum = GetPicsNum();
+                outputDir = ConfigModel.OutputDir;
                 ChangeNotifyer?.Invoke();
             }
         }
 
         /// <summary>
-        /// GetNumOfPics function.
+        /// GetPicsNum function.
         /// </summary>
-        /// <param name="outputDir">the pics output dir</param>
-        /// <returns></returns>
-        public static int GetNumOfPics()
+        /// <returns>the nmber of pictures</returns>
+        public static int GetPicsNum()
         {
             try
             {
-                if (m_outputDir == null || m_outputDir == "")
-                {
-                    return 0;
-                }
                 int counter = 0;
-                while (m_outputDir == null && (counter < 2)) { System.Threading.Thread.Sleep(1000); counter++; }
-                int sum = 0;
-                DirectoryInfo di = new DirectoryInfo(m_outputDir);
-                sum += di.GetFiles("*.PNG", SearchOption.AllDirectories).Length;
-                sum += di.GetFiles("*.BMP", SearchOption.AllDirectories).Length;
-                sum += di.GetFiles("*.JPG", SearchOption.AllDirectories).Length;
-                sum += di.GetFiles("*.GIF", SearchOption.AllDirectories).Length;
-                return sum / 2;
+                if (outputDir != null && outputDir != "")
+                {
+                    while (outputDir == null && (counter < 2)) { System.Threading.Thread.Sleep(1000); counter++; }
+                    DirectoryInfo info = new DirectoryInfo(outputDir);
+                    return PicCounter(info) / 2;
+                }
+                return counter;
             }
             catch (Exception e)
             {
-                Console.WriteLine("ImageWebModel: " + e);
+                Console.WriteLine("ImageWebModel - GetPicsNum: " + e);
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// count the photos in a dirctory
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns>number of photos found</returns>
+        private static int PicCounter(DirectoryInfo info)
+        {
+            int count = 0;
+            count += info.GetFiles("*.PNG", SearchOption.AllDirectories).Length;
+            count += info.GetFiles("*.BMP", SearchOption.AllDirectories).Length;
+            count += info.GetFiles("*.JPG", SearchOption.AllDirectories).Length;
+            count += info.GetFiles("*.GIF", SearchOption.AllDirectories).Length;
+            return count;
         }
 
         /// <summary>
@@ -113,7 +121,7 @@ namespace ImageServiceWeb.Models
 
         [Required]
         [Display(Name = "Num of Pics")]
-        public int NumofPics { get; set; }
+        public int PicsNum { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

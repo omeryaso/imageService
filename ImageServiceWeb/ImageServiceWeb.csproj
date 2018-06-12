@@ -146,7 +146,6 @@
     </Compile>
     <Compile Include="Models\ConfigModel.cs" />
     <Compile Include="Controllers\ImageWebController.cs" />
-    <Compile Include="Models\ImageWebInfo.cs" />
     <Compile Include="Models\ImageWebModel.cs" />
     <Compile Include="Models\LogCollection.cs" />
     <Compile Include="Models\Photo.cs" />

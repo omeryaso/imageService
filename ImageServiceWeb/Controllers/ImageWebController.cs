@@ -32,7 +32,7 @@ namespace ImageServiceWeb.Models
         // GET: ImageView
         public ActionResult ImageWeb()
         {
-            ViewBag.NumofPics = ImageWebModel.GetNumOfPics();
+            ViewBag.NumofPics = ImageWebModel.GetPicsNum();
             ViewBag.IsConnected = ImageViewInfoObj.IsConnected;
             return View(ImageViewInfoObj);
         }
