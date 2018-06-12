@@ -25,6 +25,12 @@ namespace ImageServiceWeb.Models
         {
             try
             {
+                ThumbnailSize = 1;
+                string[] str = { "", "", "" };
+                initCRE(str);
+                Handlers = new ObservableCollection<string>();
+                Enabled = false;
+
                 WebClient = Communication.WebClient.Instance;
                 WebClient.RecieveMessage();
                 WebClient.UpdateData += (CommandRecievedEventArgs res) =>
@@ -35,11 +41,9 @@ namespace ImageServiceWeb.Models
                             return;
 
                         if (res.CommandID == (int)CommandEnum.GetConfigCommand)
-                            UpdateConfigurations(res);
+                            WriteConfig(res);
                         else if (res.CommandID == (int)CommandEnum.HandlerShutDown)
                             HandlerClose(res);
-                        Notify?.Invoke();
-                        //update controller
                         Notify?.Invoke();
                     }
                     catch (Exception e)
@@ -48,10 +52,6 @@ namespace ImageServiceWeb.Models
                     }
                 };
 
-                OutputDirectory = LogName = SourceName = "";
-                ThumbnailSize = 1;
-                Handlers = new ObservableCollection<string>();
-                Enabled = false;
                 WebClient.SendMessage(new CommandRecievedEventArgs((int)CommandEnum.GetConfigCommand, new string[5], ""));
             }
             catch (Exception e)
@@ -94,31 +94,42 @@ namespace ImageServiceWeb.Models
         /// UpdateConfigurations function.
         /// updates app config params.
         /// </summary>
-        /// <param name="responseObj">the info came from srv</param>
-        private void UpdateConfigurations(CommandRecievedEventArgs responseObj)
+        /// <param name="msg">the info came from srv</param>
+        private void WriteConfig(CommandRecievedEventArgs msg)
         {
             try
             {
-                OutputDirectory = responseObj.Args[0];
-                SourceName = responseObj.Args[1];
-                LogName = responseObj.Args[2];
-                int num;
-                int.TryParse(responseObj.Args[3], out num);
+                string[] str = { msg.Args[0], msg.Args[1], msg.Args[2]};
+                initCRE(str);
+                int.TryParse(msg.Args[3], out int num);
                 ThumbnailSize = num;
-                string[] handlers = responseObj.Args[4].Split(';');
-                foreach (string handler in handlers)
-                {
-                    if (!Handlers.Contains(handler))
-                    {
-                        Handlers.Add(handler);
-                    }
-                }
+                string[] handlers = msg.Args[4].Split(';');
+                handlerAdder(handlers);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                Console.WriteLine("ConfigModel - DeleteHandler: " + e);
             }
         }
+
+        private void handlerAdder(string[] handlers)
+        {
+            foreach (string handler in handlers)
+            {
+                if (!Handlers.Contains(handler))
+                {
+                    Handlers.Add(handler);
+                }
+            }
+
+        }
+        private void initCRE(String[] str)
+        {
+            OutputDir = str[0];
+            SrcName = str[1];
+            LogName = str[2];
+        }
+
         //members
         [Required]
         [DataType(DataType.Text)]
@@ -126,11 +137,11 @@ namespace ImageServiceWeb.Models
 
         [Required]
         [Display(Name = "Output Directory")]
-        public string OutputDirectory { get; set; }
+        public string OutputDir { get; set; }
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Source Name")]
-        public string SourceName { get; set; }
+        public string SrcName { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

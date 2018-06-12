@@ -29,9 +29,9 @@ namespace ImageServiceWeb.Models
         /// </summary>
         void Notify()
         {
-            if (m_config.OutputDirectory != "")
+            if (m_config.OutputDir != "")
             {
-                m_outputDir = m_config.OutputDirectory;
+                m_outputDir = m_config.OutputDir;
                 GetPhotos();
                 NotifyEvent?.Invoke();
             }
