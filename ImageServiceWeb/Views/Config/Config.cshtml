@@ -1,8 +1,8 @@
-﻿@model ImageServiceWeb.Models.Config
+﻿@model ImageServiceWeb.Models.ConfigModel
 
 
 @{
-    ViewBag.Title = "Config";
+    ViewBag.Title = "Configuration";
 }
 
 <h2>Settings</h2>
@@ -18,34 +18,34 @@
         <table class="table">
             <tr>
                 <td>
-                    @Html.LabelFor(m => m.OutputDirectory)
+                    @Html.LabelFor(model => model.OutputDirectory)
                 </td>
                 <td>
-                    @Html.DisplayFor(m => m.OutputDirectory)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(m => m.SourceName)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => m.SourceName)
+                    @Html.DisplayFor(model => model.OutputDirectory)
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Html.LabelFor(m => m.LogName)
+                    @Html.LabelFor(model => model.SourceName)
                 </td>
                 <td>
-                    @Html.DisplayFor(m => m.LogName)
+                    @Html.DisplayFor(model => model.SourceName)
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Html.LabelFor(m => m.ThumbnailSize)
+                    @Html.LabelFor(model => model.LogName)
                 </td>
                 <td>
-                    @Html.DisplayFor(m => m.ThumbnailSize)
+                    @Html.DisplayFor(model => model.LogName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.ThumbnailSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ThumbnailSize)
                 </td>
             </tr>
            
@@ -57,12 +57,12 @@
                         @Html.DisplayNameFor(model => model.Handlers)
                     </th>
                 </tr>
-                @foreach (var item in Model.Handlers)
+                @foreach (var handler in Model.Handlers)
                 {
                     <tr>
                       
                         <td>
-                            @Html.ActionLink(@item, "DeleteHandler", new { toBeDeletedHandler = item })
+                            @Html.ActionLink(@handler, "DeleteHandler", new { toBeDeletedHandler = handler })
                         </td>
                        
                     </tr>

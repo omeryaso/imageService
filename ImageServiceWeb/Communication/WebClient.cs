@@ -25,7 +25,7 @@ namespace ImageServiceWeb.Communication
         public event UpdateDataIn UpdateData;
 
         /// <summary>
-        /// WebClient private constructor.
+        /// WebClient private constructor (singelton).
         /// </summary>
         private WebClient()
         {
@@ -33,7 +33,7 @@ namespace ImageServiceWeb.Communication
         }
 
         /// <summary>
-        /// Instance - returns instance of the singleton class.
+        /// Instance - returns the instance of the WebClient singleton .
         /// </summary>
         public static WebClient Instance
         {
@@ -49,9 +49,8 @@ namespace ImageServiceWeb.Communication
 
         /// <summary>
         /// Start function.
-        /// starts the tcp connection.
+        /// starts the client
         /// </summary>
-        /// <returns></returns>
         public bool Start()
         {
             try
@@ -73,7 +72,7 @@ namespace ImageServiceWeb.Communication
 
         /// <summary>
         /// RecieveMessage function.
-        /// creates task and reads new messages.
+        /// using a task to recieve a message from the server
         /// </summary>
         public void RecieveMessage()
         {
@@ -88,7 +87,7 @@ namespace ImageServiceWeb.Communication
                         readMutex.WaitOne();
                         string answer = reader.ReadString();
                         readMutex.ReleaseMutex();
-                        Console.WriteLine($"Recieve {answer} from Server");
+                        Console.WriteLine($"Recieved {answer} from Server");
                         CommandRecievedEventArgs answerObject = JsonConvert.DeserializeObject<CommandRecievedEventArgs>(answer);
                         this.UpdateData?.Invoke(answerObject);
                     }
@@ -104,23 +103,22 @@ namespace ImageServiceWeb.Communication
         /// SendMessage function.
         /// sends message to the server.
         /// </summary>
-        /// <param name="commandRecievedEventArgs">message to be sent to the server</param>
+        /// <param name="commandRecievedEventArgs">info to be sent to server</param>
         public void SendMessage(CommandRecievedEventArgs msg)
         {
                 try
                 {
-                    string jsonCommand = JsonConvert.SerializeObject(msg);
                     NetworkStream stream = client.GetStream();
                     BinaryWriter writer = new BinaryWriter(stream);
-                        // Send data to server
-                        Console.WriteLine($"Send {jsonCommand} to Server");
+                    string jsonCommand = JsonConvert.SerializeObject(msg);
+                    Console.WriteLine($"Sent {jsonCommand} to Server");
                     mutex.WaitOne();
                     writer.Write(jsonCommand);
                     mutex.ReleaseMutex();
                 }
-                catch (Exception )
+                catch (Exception)
                 {
-
+                Console.WriteLine("Error in trying to write to the server");
                 }
         }
 
@@ -131,10 +129,10 @@ namespace ImageServiceWeb.Communication
         /// </summary>
         public void CloseClient()
         {
+            isStopped = true;
             CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.HandlerShutDown, null, "");
             SendMessage(commandRecievedEventArgs);
             client.Close();
-            isStopped = true;
         }
     }
 }

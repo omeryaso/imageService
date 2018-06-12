@@ -126,7 +126,6 @@
     <Content Include="Web.config" />
     <Content Include="Views\First\Photos_old.cshtml" />
     <Content Include="Views\First\Config_old.cshtml" />
-    <Content Include="Views\Logs\Logs_old.cshtml" />
     <Content Include="Views\First\Edit.cshtml" />
     <Content Include="Views\First\Error.cshtml" />
     <Content Include="Views\First\ImageWeb_old.cshtml" />

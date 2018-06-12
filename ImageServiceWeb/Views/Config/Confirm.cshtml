@@ -1,22 +1,22 @@
-﻿@model ImageServiceWeb.Models.Config
+﻿@model ImageServiceWeb.Models.ConfigModel
 
 @{
     ViewBag.Title = "Confirm";
 
 }
 
-<h2>Are you sure you want to delete the handler?</h2>
+<h2>Do you really wan to delete this handler?</h2>
 
-<button type="button" id="btnOK" style="margin:10px">OK</button>
-<button type="button" id="btnCancel" style="margin:10px">Cancel</button>
+<button type="button" id="bOK" style="margin:10px">OK</button>
+<button type="button" id="bCancel" style="margin:10px">Cancel</button>
 <script>
-    $("#btnOK").click(function () {
-        $.post("@Url.Action("DeleteOK")", function () {
+    $("#bOK").click(function () {
+        $.post("@Url.Action("ConfirmDelete")", function () {
             window.location.href = "Config";
         });
     });
 
-    $("#btnCancel").click(function () {
+    $("#bCancel").click(function () {
         window.location.href = "Config";
     })
 </script>

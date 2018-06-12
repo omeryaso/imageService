@@ -13,9 +13,9 @@ namespace ImageServiceWeb.Communication
 
         /// <summary>
         /// SendMessage function.
-        /// sends command to srv.
+        /// sends message to the server
         /// </summary>
-        /// <param name="commandRecievedEventArgs">info to be sented to server</param>
+        /// <param name="commandRecievedEventArgs">info to be sent to server</param>
         void SendMessage(CommandRecievedEventArgs msg);
         /// <summary>
         /// CloseClient function.
@@ -24,9 +24,13 @@ namespace ImageServiceWeb.Communication
         void CloseClient();
         /// <summary>
         /// RecieveMessage function.
-        /// creates task and reads new messages.
+        /// using a task to recieve a message from the server
         /// </summary>
         void RecieveMessage();
+        /// <summary>
+        /// Start function
+        /// starts the client
+        /// </summary>
         bool Start();
         event UpdateDataIn UpdateData;
         bool IsConnected { get; set; }

@@ -6,8 +6,19 @@
 
 <h2>Image View</h2>
 
-<h3>Server status: @ViewBag.IsConnected</h3>
-<h4>Num of pics in outputDir: @ViewBag.NumofPics</h4>
+<h3>Server status: 
+    @{string stat;
+        var ans = Model.IsConnected.ToString();
+        if (ans == "True")
+        {
+            stat = "Connected";
+        }
+        else
+        {
+        stat = "Disconnected";
+        }
+    }@stat</h3>
+<h4>Number of pictures in target directory: @ViewBag.NumofPics</h4>
 
 
 <table class="table">
@@ -24,17 +35,17 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Students)
+    @foreach (var student in Model.Students)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => student.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => student.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ID)
+                @Html.DisplayFor(modelItem => student.ID)
             </td>
         </tr>
     }
