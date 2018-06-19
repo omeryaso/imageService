@@ -1,3 +1,210 @@
+commit ec7ce99c4cd8bbb4415e48516f85a3b65a57352e
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 20:21:24 2018 +0300
+
+    pushed
+
+commit 9fb5c0e7fecd27067ad3d170f6b75ae0059c2629
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 20:13:39 2018 +0300
+
+    finaly works with documantation
+
+commit acded413d9aaaea0317e4add0300b4056dda6c92
+Merge: e0e5f50 dc7b709
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 19:46:01 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit e0e5f50ca9f9f7ea94957f2da4b63772af243977
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 19:45:40 2018 +0300
+
+    just puuusshhh a litle more
+
+commit dc7b709e8edac6cb52a574fb69863cec8946890f
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 19:45:28 2018 +0300
+
+    final documentation
+
+commit ec7abca1e1fb77c59f686d9e4a1ad714a12421cd
+Merge: 06d854b 1bd57ab
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 19:31:21 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 06d854b04f762e40b80fb357abd4c203237d57bb
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 19:31:10 2018 +0300
+
+    image web documenting and some changes
+
+commit 1bd57abe6447bcec827d26c2ab4a340764811d6a
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 19:22:08 2018 +0300
+
+    Fixed a strange bug in photos
+
+commit be2d8046e63bb0ab72668cbe61041a881ca46ef5
+Merge: 3a1bf5a fd6537c
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 18:53:28 2018 +0300
+
+    mege
+
+commit 3a1bf5ae8c8f5e3926ca5a54c7ee6c0063caaa43
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 18:51:37 2018 +0300
+
+    Merged some unnecessary clsses + documantation
+
+commit fd6537c71e97ccc0980540fb47af4bcde753f5fa
+Merge: 9c185c6 80c6b53
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 18:50:36 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 9c185c6213793d1b50a94f67d84cf20d796fe995
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 18:50:23 2018 +0300
+
+    documantation + style
+
+commit 80c6b534eca0e0b5e76d8b6d7e68c1492b6ab9bb
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 18:03:22 2018 +0300
+
+    Some changes in the photo View
+
+commit 2d7bcb653a659f2d85691d82df0fa8929ebcf750
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 17:47:07 2018 +0300
+
+    forgot some documents
+
+commit e2c4023781c1ff88a1bd1e09e407e26e645f22cc
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 17:43:52 2018 +0300
+
+    config bug solved
+
+commit 9047a920d792f802363c4afead2715d8b793796a
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 16:58:02 2018 +0300
+
+    Fixed a bug in the confirmView
+
+commit f635c68e2bd52cd9f10ab5e8ce57e7f4acfb1e38
+Merge: 14cc5a3 c2714ce
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 16:51:17 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 14cc5a3932aeed25e2a4ec71020152973d345de3
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 16:51:00 2018 +0300
+
+    Bug gixes in view, started to document
+
+commit c2714ce17d2e89af1eb2d4787739919714940fe8
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 16:50:32 2018 +0300
+
+    fixed some bugs in the configModel + some documentation
+
+commit 1ec078850c69a2a146ff9fe71c775e15209a9f86
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Tue Jun 12 11:31:44 2018 +0300
+
+    Client bug Fixes
+
+commit 20ac139a3b84174a30f85bb1a7463cfd57925c91
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Tue Jun 12 10:28:26 2018 +0300
+
+    changes in the csproj ile
+
+commit c40e46ddc345313955a78fa2b6db847bd91421b8
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 22:39:58 2018 +0300
+
+    fixed the images borders problem and some more minor changes
+
+commit 13bb086918fcf6ec42c3789713b880717bca6445
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Mon Jun 11 17:05:50 2018 +0300
+
+    Changea log in the service.
+
+commit 712e2caad6efacf44780ebf64bb9804e3863e5c4
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 16:35:27 2018 +0300
+
+    fixed some bugs in the log, looks better
+
+commit bc611a787cfdeb9a4d67fd4fd464a5f71e0acab6
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 15:41:56 2018 +0300
+
+    Revert "some changes"
+    
+    This reverts commit 6ac3c72749de2091be3dbb24dc9ec73f98b0ca77.
+
+commit fca30ae0b30602bbf650007e039936ed86b5e286
+Merge: 6ac3c72 1ac6a59
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 15:39:11 2018 +0300
+
+    Merge branch 'master' of https://github.com/omeryaso/imageService
+
+commit 6ac3c72749de2091be3dbb24dc9ec73f98b0ca77
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 15:38:24 2018 +0300
+
+    some changes
+
+commit 1ac6a59e1b4fb3e15cbfc49b242fe214d7542a58
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Mon Jun 11 15:32:25 2018 +0300
+
+    Bug Fixes - the photos work now
+
+commit d8dde10e99c97da51b2b437b92fc575bb75dede3
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 14:33:50 2018 +0300
+
+    merge complete
+
+commit 1cf42dfca2a6abe816ba262e633df3441572196b
+Merge: 18d82b0 701851f
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 14:29:11 2018 +0300
+
+    merge or....
+
+commit 18d82b00eff2c0c1792ae64b727b5f871bbc8adb
+Author: omer yaso <yasoome@macs.biu.ac.il>
+Date:   Mon Jun 11 14:24:03 2018 +0300
+
+    some progress with the web
+
+commit 701851f416bb3e0b1a04c36c47be07fea40c0556
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Mon Jun 11 14:19:15 2018 +0300
+
+    Service fix error
+
+commit eca4a33425138a0256b4d086abfc7357f4f6ed4e
+Author: Shlomy <Shlomy@LAPTOP-OISRR22I>
+Date:   Sun Jun 10 15:34:14 2018 +0300
+
+    Guibug fixes
+
 commit 7d2b6498aaad6362c33be1e32eec7ef01f14dbe4
 Author: omer yaso <yasoome@macs.biu.ac.il>
 Date:   Sun May 27 21:49:22 2018 +0300

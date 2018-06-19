@@ -69,7 +69,11 @@
     <Compile Include="ImageService\Commands\ICommand.cs" />
     <Compile Include="ImageService\Commands\LogCommand.cs" />
     <Compile Include="ImageService\Commands\NewFileCommand.cs" />
+    <Compile Include="ImageService\Comunication\AppClientHandler.cs" />
+    <Compile Include="ImageService\Comunication\AppServer.cs" />
     <Compile Include="ImageService\Comunication\ClientHandler.cs" />
+    <Compile Include="ImageService\Comunication\IAppClientHandler.cs" />
+    <Compile Include="ImageService\Comunication\IAppServer.cs" />
     <Compile Include="ImageService\Comunication\IClientHandler.cs" />
     <Compile Include="ImageService\Comunication\ImgServer.cs" />
     <Compile Include="ImageService\Controller\Handlers\DirectoryHandler.cs" />
