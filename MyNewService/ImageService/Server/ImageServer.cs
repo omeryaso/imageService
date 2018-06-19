@@ -28,6 +28,7 @@ namespace ImageService.Server
         public event EventHandler<DirectoryCloseEventArgs> CloseServer;
         public event EventHandler<CommandRecievedEventArgs> CommandRecieved;          // The event that notifies about a new Command being recieved
         public Dictionary<string, IDirectoryHandler> Handlers { get; set; }
+        public string[] Directories { get; set; }
         #endregion
 
         /// <summary>
@@ -40,9 +41,9 @@ namespace ImageService.Server
             this.m_controller = m_controller;
             this.Handlers = new Dictionary<string, IDirectoryHandler>();
             this.m_logging = m_logging;
-            string[] directories = (ConfigurationManager.AppSettings.Get("Handler").Split(';'));
+            Directories = (ConfigurationManager.AppSettings.Get("Handler").Split(';'));
             // creates an handler for each directory
-            foreach (string directory in directories)
+            foreach (string directory in Directories)
             {
                 CreateHandler(directory);
             }

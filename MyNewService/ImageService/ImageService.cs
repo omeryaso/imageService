@@ -14,6 +14,7 @@ using ImageService.Controller;
 using ImageService.Logging;
 using ImageService.Logging.Modal;
 using System.Configuration;
+using ImageService.Comunication;
 
 public enum ServiceState
 {
@@ -81,6 +82,9 @@ namespace ImageService
             ImageServer.NotifyHandlersRemoved += imgServer.NotifyClients;
             this.logging.LogsUpdate += imgServer.NotifyClients;
             imgServer.Start();
+            IAppClientHandler tcpClientHandler = new AppClientHandler(contr, logging);
+            IAppServer tcpServer = new AppServer(7999, logging, tcpClientHandler);
+            tcpServer.Start();
 
         }
 
