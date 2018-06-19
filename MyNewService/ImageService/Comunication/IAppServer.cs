@@ -8,5 +8,6 @@ namespace ImageService.Comunication
 {
     interface IAppServer
     {
+        void Start();
     }
 }
