@@ -12,7 +12,7 @@ namespace ImageService.Controller
     /// </summary>
     public interface IImageController
     {
-        ImageServer ImageServer { get; }
+        ImageServer ImageServer { get; set; }
         string ExecuteCommand(int commandID, string[] args, out bool result);          // Executing the Command Requet
     }
 }

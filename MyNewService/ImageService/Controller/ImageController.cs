@@ -21,7 +21,10 @@ namespace ImageService.Controller
         private IImageServiceModal m_modal;                      // The Modal Object
         private Dictionary<int, ICommand> commands;
         private ImageServer imageServer;
-        public ImageServer ImageServer { get { return imageServer; } }
+        public ImageServer ImageServer { get { return imageServer; } set{
+                imageServer = value;
+                commands[((int)CommandEnum.HandlerShutDown)] = new HandlerShutDownCommand(imageServer,logging);
+            } }
 
         private ILoggingService logging;
 
@@ -40,7 +43,6 @@ namespace ImageService.Controller
                 { (int)CommandEnum.CloseCommand,new CloseCommand()},
                 { (int)CommandEnum.GetConfigCommand,new GetConfigCommand()},
                 { (int)CommandEnum.LogCommand,new LogCommand(logging)},
-                { (int)CommandEnum.HandlerShutDown,new HandlerShutDownCommand (imageServer,logging)}
             };
         }
 

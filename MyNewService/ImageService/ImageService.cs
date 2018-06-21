@@ -77,6 +77,7 @@ namespace ImageService
             this.modal = new ImageServiceModal(ConfigurationManager.AppSettings["OutputDir"], Int32.Parse(ConfigurationManager.AppSettings.Get("ThumbnailSize")));
             this.contr = new ImageController(this.modal, logging, m_imageServer);
             this.m_imageServer = new ImageServer(this.contr, this.logging);
+            this.contr.ImageServer = m_imageServer;
             IClientHandler clientHandler = new ClientHandler(contr, logging);
             this.imgServer = new ImgServer(8000, clientHandler, logging);
             ImageServer.NotifyHandlersRemoved += imgServer.NotifyClients;
