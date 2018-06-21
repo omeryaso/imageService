@@ -20,13 +20,21 @@ namespace ImageService.Comunication
         private List<TcpClient> Clients = new List<TcpClient>();
         private static Mutex Mutex = new Mutex();
 
+        /// <summary>
+        /// creates an instance of the AppServer
+        /// </summary>
+        /// <param name="port"></param> the port we are using
+        /// <param name="logging"></param> the service logger
+        /// <param name="ch"></param> the ClientHandler
         public AppServer(int port, ILoggingService logging, IAppClientHandler ch)
         {
             Port = port;
             Logging = logging;
             ClientHandler = ch;
         }
-
+        /// <summary>
+        /// starts the server
+        /// </summary>
         public void Start()
         {
             try
@@ -36,7 +44,7 @@ namespace ImageService.Comunication
                 Listener = new TcpListener(ep);
 
                 Listener.Start();
-                Logging.Log("Waiting for client connections...", MessageTypeEnum.INFO);
+                Logging.Log("Waiting for client connections of the android application...", MessageTypeEnum.INFO);
                 Task task = new Task(() =>
                 {
                     while (true)
@@ -44,7 +52,7 @@ namespace ImageService.Comunication
                         try
                         {
                             TcpClient client = Listener.AcceptTcpClient();
-                            Logging.Log("Got new connection", MessageTypeEnum.INFO);
+                            Logging.Log("Got new connection - ", MessageTypeEnum.INFO);
                             Clients.Add(client);
                             ClientHandler.HandleClient(client, Clients);
                         }

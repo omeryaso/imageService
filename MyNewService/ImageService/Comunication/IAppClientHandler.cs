@@ -9,6 +9,11 @@ namespace ImageService.Comunication
 {
     interface IAppClientHandler
     {
+        /// <summary>
+        /// handle the client
+        /// </summary>
+        /// <param name="client"></param> the tcpClient
+        /// <param name="clients"></param> the list of clients
         void HandleClient(TcpClient client, List<TcpClient> clients);
     }
 }
